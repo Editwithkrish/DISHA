@@ -17,6 +17,13 @@ import {
   HeartHandshake,
   UserCheck,
   Globe,
+  User,
+  Palette,
+  Layout,
+  Lock,
+  Users2,
+  Cog,
+  Building2,
   ChevronDown,
   Download,
   Filter,
@@ -26,6 +33,24 @@ import {
   Calendar,
   Plus,
   RefreshCw,
+  FileBarChart,
+  Shield,
+  Play,
+  Share2,
+  MoreHorizontal,
+  Clock,
+  Activity,
+  Database,
+  Server,
+  HelpCircle,
+  Info,
+  BookOpen,
+  Lightbulb,
+  Grid3X3,
+  Move,
+  RotateCcw,
+  Save,
+  Check
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -42,6 +67,7 @@ import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Tooltip as UITooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import dynamic from 'next/dynamic'
 
 // Dynamic import for Leaflet to avoid SSR issues
@@ -56,7 +82,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
+  Tooltip as RechartsTooltip,
   ResponsiveContainer,
   BarChart,
   Bar,
@@ -102,6 +128,22 @@ const translations = {
     statePerformance: "Rajasthan Education Performance",
     budgetUtilization: "Budget Utilization",
     policyImpact: "Policy Impact Assessment",
+    stateAnalytics: "State Analytics",
+    districtComparison: "District Comparison",
+    performanceMetrics: "Performance Metrics",
+    enrollmentTrends: "Enrollment Trends",
+    budgetAnalysis: "Budget Analysis",
+    infrastructureStatus: "Infrastructure Status",
+    teacherDistribution: "Teacher Distribution",
+    studentOutcomes: "Student Outcomes",
+    ministryReports: "Ministry Reports",
+    systemAdmin: "System Administration",
+    userManagement: "User Management",
+    roleBasedAccess: "Role-Based Access Control",
+    systemMonitoring: "System Monitoring",
+    dataBackup: "Data Backup & Recovery",
+    auditLogs: "Audit Logs",
+    securitySettings: "Security Settings",
   },
   hi: {
     title: "राजस्थान शिक्षा मंत्रालय - बोर्ड स्तरीय डैशबोर्ड",
@@ -127,6 +169,22 @@ const translations = {
     statePerformance: "राजस्थान शिक्षा प्रदर्शन",
     budgetUtilization: "बजट उपयोग",
     policyImpact: "नीति प्रभाव मूल्यांकन",
+    stateAnalytics: "राज्य विश्लेषण",
+    districtComparison: "जिला तुलना",
+    performanceMetrics: "प्रदर्शन मेट्रिक्स",
+    enrollmentTrends: "नामांकन रुझान",
+    budgetAnalysis: "बजट विश्लेषण",
+    infrastructureStatus: "अवसंरचना स्थिति",
+    teacherDistribution: "शिक्षक वितरण",
+    studentOutcomes: "छात्र परिणाम",
+    ministryReports: "मंत्रालय रिपोर्ट",
+    systemAdmin: "सिस्टम प्रशासन",
+    userManagement: "उपयोगकर्ता प्रबंधन",
+    roleBasedAccess: "भूमिका-आधारित पहुंच नियंत्रण",
+    systemMonitoring: "सिस्टम निगरानी",
+    dataBackup: "डेटा बैकअप और रिकवरी",
+    auditLogs: "ऑडिट लॉग",
+    securitySettings: "सुरक्षा सेटिंग्स",
   },
   mr: {
     title: "राजस्थान शिक्षण मंत्रालय - बोर्ड स्तरीय डॅशबोर्ड",
@@ -148,10 +206,26 @@ const translations = {
     dropoutByLevel: "शिक्षण स्तरानुसार ड्रॉपआउट विश्लेषण",
     dropoutReasons: "प्राथमिक ड्रॉपआउट घटक",
     lastUpdated: "डेटा शेवटचे सिंक्रोनाइझेशन",
-    ministryKPIs: "मंत्रालय मुख्य कामगिरी निर्देशक",
-    statePerformance: "राजस्थान शिक्षण कामगिरी",
+    ministryKPIs: "मंत्रालय मुख्य कार्यप्रदर्शन निर्देशक",
+    statePerformance: "राजस्थान शिक्षण कार्यप्रदर्शन",
     budgetUtilization: "अर्थसंकल्प वापर",
     policyImpact: "धोरण प्रभाव मूल्यांकन",
+    stateAnalytics: "राज्य विश्लेषण",
+    districtComparison: "जिल्हा तुलना",
+    performanceMetrics: "कार्यप्रदर्शन मेट्रिक्स",
+    enrollmentTrends: "नोंदणी ट्रेंड",
+    budgetAnalysis: "अर्थसंकल्प विश्लेषण",
+    infrastructureStatus: "पायाभूत सुविधा स्थिती",
+    teacherDistribution: "शिक्षक वितरण",
+    studentOutcomes: "विद्यार्थी परिणाम",
+    ministryReports: "मंत्रालय अहवाल",
+    systemAdmin: "सिस्टम प्रशासन",
+    userManagement: "वापरकर्ता व्यवस्थापन",
+    roleBasedAccess: "भूमिका-आधारित प्रवेश नियंत्रण",
+    systemMonitoring: "सिस्टम निरीक्षण",
+    dataBackup: "डेटा बॅकअप आणि रिकव्हरी",
+    auditLogs: "ऑडिट लॉग",
+    securitySettings: "सुरक्षा सेटिंग्स",
   },
 }
 
@@ -181,6 +255,25 @@ export default function Dashboard() {
   const { toast } = useToast()
 
   const t = translations[language]
+
+  // Helper function for tooltip content
+  const getTooltipContent = (sectionId: string) => {
+    const tooltips = {
+      overview: "View comprehensive dashboard overview with key metrics and insights",
+      "state-analytics": "Analyze district-wise performance metrics and enrollment trends",
+      regions: "Explore regional data with interactive maps and filtering options",
+      universities: "Monitor higher education institutions and their performance",
+      teachers: "Track faculty analytics, engagement, and workload distribution",
+      students: "Analyze student population data and demographic insights",
+      "ai-insights": "Access predictive analytics and AI-powered recommendations",
+      counselling: "Manage student support services and counselling programs",
+      "ministry-reports": "Generate and schedule automated ministry reports",
+      reports: "Create custom reports with multiple export formats",
+      "system-admin": "Manage users, roles, and system administration settings",
+      settings: "Configure system preferences and user settings"
+    }
+    return tooltips[sectionId as keyof typeof tooltips] || "Navigate to this section"
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -705,13 +798,16 @@ export default function Dashboard() {
 
   const navigationItems = [
     { id: "overview", label: t.overview, icon: BarChart3 },
+    { id: "state-analytics", label: t.stateAnalytics, icon: TrendingUp },
     { id: "regions", label: t.regions, icon: MapPin },
     { id: "universities", label: t.universities, icon: GraduationCap },
     { id: "teachers", label: t.teachers, icon: UserCheck },
     { id: "students", label: t.students, icon: Users },
     { id: "ai-insights", label: t.aiInsights, icon: BrainCircuit },
     { id: "counselling", label: t.counselling, icon: HeartHandshake },
+    { id: "ministry-reports", label: t.ministryReports, icon: FileBarChart },
     { id: "reports", label: t.reports, icon: FileText },
+    { id: "system-admin", label: t.systemAdmin, icon: Shield },
     { id: "settings", label: t.settings, icon: Settings },
   ]
 
@@ -787,7 +883,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
                 <XAxis dataKey="year" stroke="#64748b" />
                 <YAxis stroke="#64748b" />
-                <Tooltip
+                <RechartsTooltip
                   contentStyle={{
                     backgroundColor: "#f8fafc",
                     border: "1px solid #e2e8f0",
@@ -816,7 +912,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
                 <XAxis dataKey="level" stroke="#64748b" />
                 <YAxis stroke="#64748b" />
-                <Tooltip
+                <RechartsTooltip
                   contentStyle={{
                     backgroundColor: "#f8fafc",
                     border: "1px solid #e2e8f0",
@@ -851,7 +947,7 @@ export default function Dashboard() {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
+              <RechartsTooltip />
             </PieChart>
           </ResponsiveContainer>
         </CardContent>
@@ -870,7 +966,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
                 <XAxis dataKey="month" stroke="#64748b" />
                 <YAxis stroke="#64748b" />
-                <Tooltip
+                <RechartsTooltip
                   contentStyle={{
                     backgroundColor: "#f8fafc",
                     border: "1px solid #e2e8f0",
@@ -913,7 +1009,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
                 <XAxis type="number" domain={[0, 100]} stroke="#64748b" />
                 <YAxis dataKey="district" type="category" stroke="#64748b" width={80} />
-                <Tooltip
+                <RechartsTooltip
                   contentStyle={{
                     backgroundColor: "#f8fafc",
                     border: "1px solid #e2e8f0",
@@ -1001,7 +1097,7 @@ export default function Dashboard() {
                   strokeWidth={2}
                 />
                 <Legend />
-                <Tooltip
+                <RechartsTooltip
                   contentStyle={{
                     backgroundColor: "#f8fafc",
                     border: "1px solid #e2e8f0",
@@ -1039,7 +1135,7 @@ export default function Dashboard() {
                   domain={[80, 100]}
                   stroke="#64748b"
                 />
-                <Tooltip
+                <RechartsTooltip
                   cursor={{ strokeDasharray: '3 3' }}
                   contentStyle={{
                     backgroundColor: "#f8fafc",
@@ -1080,7 +1176,7 @@ export default function Dashboard() {
               <XAxis dataKey="month" stroke="#64748b" />
               <YAxis yAxisId="left" stroke="#64748b" />
               <YAxis yAxisId="right" orientation="right" stroke="#64748b" />
-              <Tooltip
+              <RechartsTooltip
                 contentStyle={{
                   backgroundColor: "#f8fafc",
                   border: "1px solid #e2e8f0",
@@ -1133,7 +1229,7 @@ export default function Dashboard() {
               <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
               <XAxis dataKey="type" stroke="#64748b" angle={-45} textAnchor="end" height={100} />
               <YAxis stroke="#64748b" />
-              <Tooltip
+              <RechartsTooltip
                 contentStyle={{
                   backgroundColor: "#f8fafc",
                   border: "1px solid #e2e8f0",
@@ -1153,393 +1249,17 @@ export default function Dashboard() {
     </div>
   )
 
-  const renderRegionsDistricts = () => {
-    return (
-      <div className="space-y-6">
-        {/* Regional Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {regionSummary.map((region, index) => (
-            <Card key={index} className="border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-slate-700">{region.region} Region</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="text-lg font-bold text-slate-800">{region.districts} Districts</div>
-                  <div className="text-sm text-slate-600">
-                    <div>Enrollment: {region.avgEnrollment}%</div>
-                    <div>Students: {(region.totalStudents / 1000).toFixed(0)}K</div>
-                    <div>Budget: ₹{region.budget}Cr</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
 
-        {/* Comprehensive Hierarchical Filters */}
-        <Card className="border-2 border-blue-100 shadow-lg bg-gradient-to-r from-blue-50 to-indigo-50">
-          <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
-              Comprehensive Analytics Filters
-            </CardTitle>
-            <CardDescription className="text-blue-100">
-              Drill down from state to district to institution level data
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-6">
-            {/* Level Selection */}
-            <div className="mb-6">
-              <Label className="text-sm font-semibold text-slate-700 mb-2 block">Analysis Level</Label>
-              <div className="flex flex-wrap gap-2">
-                {['state', 'district', 'institution'].map((level) => (
-                  <Button
-                    key={level}
-                    variant={selectedLevel === level ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedLevel(level)}
-                    className={selectedLevel === level ? 'bg-blue-600 hover:bg-blue-700' : 'hover:bg-blue-50'}
-                  >
-                    {level.charAt(0).toUpperCase() + level.slice(1)} Level
-                  </Button>
-                ))}
-              </div>
-            </div>
 
-            {/* Search and Quick Filters */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              <div>
-                <Label className="text-sm font-medium text-slate-700">Search</Label>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-                  <Input
-                    placeholder="Search districts, institutions..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-              </div>
-              <div>
-                <Label className="text-sm font-medium text-slate-700">Timeframe</Label>
-                <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select timeframe" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="current">Current Academic Year</SelectItem>
-                    <SelectItem value="previous">Previous Academic Year</SelectItem>
-                    <SelectItem value="last3">Last 3 Years</SelectItem>
-                    <SelectItem value="last5">Last 5 Years</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label className="text-sm font-medium text-slate-700">Primary Metric</Label>
-                <Select value={selectedMetric} onValueChange={setSelectedMetric}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select metric" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="enrollment">Enrollment Rate</SelectItem>
-                    <SelectItem value="retention">Retention Rate</SelectItem>
-                    <SelectItem value="completion">Completion Rate</SelectItem>
-                    <SelectItem value="infrastructure">Infrastructure Score</SelectItem>
-                    <SelectItem value="budget">Budget Utilization</SelectItem>
-                    <SelectItem value="performance">Academic Performance</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex items-end">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700" variant="default">
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  Apply Filters
-                </Button>
-              </div>
-            </div>
 
-            {/* Hierarchical Filters */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <Label className="text-sm font-medium text-slate-700">Region</Label>
-                <Select value={selectedRegion} onValueChange={handleRegionChange}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select region" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Regions</SelectItem>
-                    <SelectItem value="Central">Central Rajasthan</SelectItem>
-                    <SelectItem value="Western">Western Rajasthan</SelectItem>
-                    <SelectItem value="Eastern">Eastern Rajasthan</SelectItem>
-                    <SelectItem value="Southern">Southern Rajasthan</SelectItem>
-                    <SelectItem value="Northern">Northern Rajasthan</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div>
-                <Label className="text-sm font-medium text-slate-700">District</Label>
-                <Select 
-                  value={selectedDistrict} 
-                  onValueChange={handleDistrictChange}
-                  disabled={selectedRegion === 'all'}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select district" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Districts</SelectItem>
-                    {getAvailableDistricts().map((district) => (
-                      <SelectItem key={district} value={district}>
-                        {district}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
 
-              <div>
-                <Label className="text-sm font-medium text-slate-700">Institution Type</Label>
-                <Select 
-                  value={selectedInstitutionType} 
-                  onValueChange={setSelectedInstitutionType}
-                  disabled={selectedLevel === 'state'}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Types</SelectItem>
-                    {institutionTypes.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
-                        {type.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
 
-            {/* Institution Selection (when district is selected) */}
-            {selectedLevel === 'institution' && selectedDistrict !== 'all' && (
-              <div className="mt-4">
-                <Label className="text-sm font-medium text-slate-700">Specific Institution</Label>
-                <Select value={selectedInstitution} onValueChange={setSelectedInstitution}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select institution" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Institutions</SelectItem>
-                    {getAvailableInstitutions().map((institution) => (
-                      <SelectItem key={institution.id} value={institution.id}>
-                        {institution.name} ({institution.type})
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-200">
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
-                Export Data
-              </Button>
-              <Button variant="outline" size="sm">
-                <Eye className="h-4 w-4 mr-2" />
-                View Details
-              </Button>
-              <Button variant="outline" size="sm">
-                <Calendar className="h-4 w-4 mr-2" />
-                Schedule Report
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => {
-                  setSelectedLevel('state')
-                  setSelectedRegion('all')
-                  setSelectedDistrict('all')
-                  setSelectedInstitutionType('all')
-                  setSelectedInstitution('all')
-                  setSearchQuery('')
-                }}
-              >
-                <X className="h-4 w-4 mr-2" />
-                Clear All
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Filter Summary */}
-        <Card className="border-2 border-green-100 shadow-lg bg-gradient-to-r from-green-50 to-blue-50">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="bg-green-100 p-2 rounded-lg">
-                  <Filter className="h-5 w-5 text-green-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800">Current View</h3>
-                  <p className="text-sm text-slate-600">
-                    {selectedLevel === 'state' ? 'State-level Overview' : 
-                     selectedLevel === 'district' ? `District: ${selectedDistrict || 'All Districts'}` : 
-                     `Institution: ${selectedInstitution || 'All Institutions'}`}
-                    {selectedRegion && ` • Region: ${selectedRegion}`}
-                    {selectedInstitutionType && ` • Type: ${selectedInstitutionType}`}
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-slate-800">{getFilteredData().length}</div>
-                <div className="text-sm text-slate-600">
-                  {selectedLevel === 'state' ? 'Regions' : 
-                   selectedLevel === 'district' ? 'Districts' : 
-                   'Institutions'}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* District Performance Visualization */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="border-2 border-blue-100 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-slate-800">
-                {selectedLevel === 'state' ? 'Regional Performance Overview' : 
-                 selectedLevel === 'district' ? 'District Performance Comparison' : 
-                 'Institution Performance Analysis'}
-              </CardTitle>
-              <CardDescription>
-                {selectedLevel === 'state' ? 'Key education metrics across regions' : 
-                 selectedLevel === 'district' ? 'Key education metrics across districts' : 
-                 'Key education metrics across institutions'}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={getFilteredData()}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
-                  <XAxis 
-                    dataKey="name" 
-                    stroke="#64748b" 
-                    angle={-45}
-                    textAnchor="end"
-                    height={80}
-                  />
-                  <YAxis stroke="#64748b" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#f8fafc",
-                      border: "1px solid #e2e8f0",
-                      borderRadius: "8px",
-                    }}
-                    formatter={(value, name) => [
-                      `${value}%`,
-                      name.charAt(0).toUpperCase() + name.slice(1)
-                    ]}
-                  />
-                  <Bar dataKey={selectedMetric} fill="#3b82f6" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
 
-          <Card className="border-2 border-blue-100 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-slate-800">Regional Distribution</CardTitle>
-              <CardDescription>Student population by region</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <PieChart>
-                  <Pie
-                    data={regionSummary}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={({ region, totalStudents }) => 
-                      `${region}: ${(totalStudents / 1000).toFixed(0)}K`
-                    }
-                    outerRadius={120}
-                    fill="#8884d8"
-                    dataKey="totalStudents"
-                  >
-                    {regionSummary.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={[
-                        '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'
-                      ][index % 5]} />
-                    ))}
-                  </Pie>
-                  <Tooltip 
-                    formatter={(value) => [`${(value / 1000).toFixed(0)}K Students`, 'Population']}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
 
-        {/* Detailed District Table */}
-        <Card className="border-2 border-blue-100 shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-slate-800">District Details</CardTitle>
-            <CardDescription>Comprehensive metrics for selected districts</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>District</TableHead>
-                    <TableHead>Region</TableHead>
-                    <TableHead>Schools</TableHead>
-                    <TableHead>Students</TableHead>
-                    <TableHead>Teachers</TableHead>
-                    <TableHead>Enrollment %</TableHead>
-                    <TableHead>Retention %</TableHead>
-                    <TableHead>Budget (₹Cr)</TableHead>
-                    <TableHead>Literacy %</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredDistricts.map((district, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{district.name}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{district.region}</Badge>
-                      </TableCell>
-                      <TableCell>{district.schools.toLocaleString()}</TableCell>
-                      <TableCell>{district.students.toLocaleString()}</TableCell>
-                      <TableCell>{district.teachers.toLocaleString()}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <span>{district.enrollment}%</span>
-                          <Progress value={district.enrollment} className="w-16 h-2" />
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <span>{district.retention}%</span>
-                          <Progress value={district.retention} className="w-16 h-2" />
-                        </div>
-                      </TableCell>
-                      <TableCell>₹{district.budget}</TableCell>
-                      <TableCell>{district.literacyRate}%</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
+
 
   const renderUniversities = () => {
     const filteredUniversities = universitiesData.filter(uni => {
@@ -1691,7 +1411,7 @@ export default function Dashboard() {
                     fontSize={10}
                   />
                   <YAxis stroke="#64748b" />
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -1728,7 +1448,7 @@ export default function Dashboard() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip 
+                <RechartsTooltip 
                   contentStyle={{ 
                     backgroundColor: 'white', 
                     border: '1px solid #e2e8f0',
@@ -1864,7 +1584,7 @@ export default function Dashboard() {
                     stroke="#64748b" 
                     label={{ value: 'Dropout Rate (%)', angle: -90, position: 'insideLeft' }}
                   />
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -1904,7 +1624,7 @@ export default function Dashboard() {
                     fontSize={10}
                   />
                   <YAxis stroke="#64748b" label={{ value: 'Hours/Week', angle: -90, position: 'insideLeft' }} />
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -1940,7 +1660,7 @@ export default function Dashboard() {
                     fontSize={10}
                   />
                   <YAxis stroke="#64748b" label={{ value: 'Engagement (%)', angle: -90, position: 'insideLeft' }} />
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -2281,7 +2001,7 @@ export default function Dashboard() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                   <XAxis dataKey="type" stroke="#64748b" fontSize={12} angle={-45} textAnchor="end" height={80} />
                   <YAxis stroke="#64748b" fontSize={12} />
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -2975,13 +2695,35 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-6">
-                <TabsTrigger value="profile">Profile</TabsTrigger>
-                <TabsTrigger value="preferences">Preferences</TabsTrigger>
-                <TabsTrigger value="security">Security</TabsTrigger>
-                <TabsTrigger value="roles">Roles & Access</TabsTrigger>
-                <TabsTrigger value="system">System Config</TabsTrigger>
-                <TabsTrigger value="ministry">Ministry Settings</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-7">
+                <TabsTrigger value="profile" className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  Profile
+                </TabsTrigger>
+                <TabsTrigger value="preferences" className="flex items-center gap-2">
+                  <Palette className="h-4 w-4" />
+                  Preferences
+                </TabsTrigger>
+                <TabsTrigger value="widgets" className="flex items-center gap-2">
+                  <Layout className="h-4 w-4" />
+                  Dashboard
+                </TabsTrigger>
+                <TabsTrigger value="security" className="flex items-center gap-2">
+                  <Lock className="h-4 w-4" />
+                  Security
+                </TabsTrigger>
+                <TabsTrigger value="roles" className="flex items-center gap-2">
+                  <Users2 className="h-4 w-4" />
+                  Roles & Access
+                </TabsTrigger>
+                <TabsTrigger value="system" className="flex items-center gap-2">
+                  <Cog className="h-4 w-4" />
+                  System Config
+                </TabsTrigger>
+                <TabsTrigger value="ministry" className="flex items-center gap-2">
+                  <Building2 className="h-4 w-4" />
+                  Ministry Settings
+                </TabsTrigger>
               </TabsList>
 
               {/* Profile Tab */}
@@ -3119,6 +2861,108 @@ export default function Dashboard() {
                       </div>
                     </div>
 
+                    <Separator />
+
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-medium">Layout Customization</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="sidebar-position">Sidebar Position</Label>
+                          <Select defaultValue="left">
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="left">Left</SelectItem>
+                              <SelectItem value="right">Right</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="card-density">Card Density</Label>
+                          <Select defaultValue="comfortable">
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="compact">Compact</SelectItem>
+                              <SelectItem value="comfortable">Comfortable</SelectItem>
+                              <SelectItem value="spacious">Spacious</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-0.5">
+                          <Label>Collapsible Sidebar</Label>
+                          <p className="text-sm text-muted-foreground">Allow sidebar to be collapsed</p>
+                        </div>
+                        <Switch defaultChecked={true} />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-0.5">
+                          <Label>Show Breadcrumbs</Label>
+                          <p className="text-sm text-muted-foreground">Display navigation breadcrumbs</p>
+                        </div>
+                        <Switch defaultChecked={true} />
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-medium">Data Display Configuration</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="chart-animation">Chart Animations</Label>
+                          <Select defaultValue="enabled">
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="enabled">Enabled</SelectItem>
+                              <SelectItem value="disabled">Disabled</SelectItem>
+                              <SelectItem value="reduced">Reduced Motion</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="number-format">Number Format</Label>
+                          <Select defaultValue="indian">
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="indian">Indian (1,00,000)</SelectItem>
+                              <SelectItem value="international">International (100,000)</SelectItem>
+                              <SelectItem value="abbreviated">Abbreviated (100K)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-0.5">
+                          <Label>Show Data Labels</Label>
+                          <p className="text-sm text-muted-foreground">Display values on charts</p>
+                        </div>
+                        <Switch defaultChecked={true} />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-0.5">
+                          <Label>High Contrast Mode</Label>
+                          <p className="text-sm text-muted-foreground">Enhanced visibility for charts and data</p>
+                        </div>
+                        <Switch defaultChecked={false} />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-0.5">
+                          <Label>Compact Tables</Label>
+                          <p className="text-sm text-muted-foreground">Reduce table row height</p>
+                        </div>
+                        <Switch defaultChecked={false} />
+                      </div>
+                    </div>
+
                     <div className="flex justify-end">
                       <Button onClick={handleSavePreferences}>Save Preferences</Button>
                     </div>
@@ -3183,6 +3027,112 @@ export default function Dashboard() {
                             notifications: {...preferences.notifications, reports: checked}
                           })}
                         />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Dashboard Widgets Tab */}
+              <TabsContent value="widgets" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Dashboard Widgets</CardTitle>
+                    <CardDescription>Customize which widgets are visible on your dashboard</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-medium">Widget Visibility</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-overview">Executive Overview</Label>
+                          <Switch id="show-overview" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-analytics">State Analytics</Label>
+                          <Switch id="show-analytics" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-universities">Higher Education</Label>
+                          <Switch id="show-universities" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-teachers">Faculty Analytics</Label>
+                          <Switch id="show-teachers" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-students">Student Analytics</Label>
+                          <Switch id="show-students" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-ai">AI Insights</Label>
+                          <Switch id="show-ai" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-counselling">Counselling Services</Label>
+                          <Switch id="show-counselling" defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="show-reports">Ministry Reports</Label>
+                          <Switch id="show-reports" defaultChecked />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <Separator />
+                    
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-medium">Widget Arrangement</h4>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="widget-order">Default Widget Order</Label>
+                          <Select defaultValue="priority">
+                            <SelectTrigger className="w-48">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="priority">By Priority</SelectItem>
+                              <SelectItem value="alphabetical">Alphabetical</SelectItem>
+                              <SelectItem value="usage">By Usage Frequency</SelectItem>
+                              <SelectItem value="custom">Custom Order</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="widgets-per-row">Widgets Per Row</Label>
+                          <Select defaultValue="auto">
+                            <SelectTrigger className="w-32">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="1">1</SelectItem>
+                              <SelectItem value="2">2</SelectItem>
+                              <SelectItem value="3">3</SelectItem>
+                              <SelectItem value="auto">Auto</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="enable-drag-drop">Enable Drag & Drop Reordering</Label>
+                          <Switch id="enable-drag-drop" defaultChecked />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <Separator />
+                    
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-medium">Quick Actions</h4>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          Reset to Default
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          Save as Template
+                        </Button>
+                        <Button size="sm">
+                          Apply Changes
+                        </Button>
                       </div>
                     </div>
                   </CardContent>
@@ -3620,7 +3570,7 @@ export default function Dashboard() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                     <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
                     <YAxis stroke="#64748b" fontSize={12} />
-                    <Tooltip 
+                    <RechartsTooltip 
                       contentStyle={{ 
                         backgroundColor: 'white', 
                         border: '1px solid #e2e8f0',
@@ -3678,7 +3628,7 @@ export default function Dashboard() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                     <XAxis dataKey="name" stroke="#64748b" fontSize={12} />
                     <YAxis stroke="#64748b" fontSize={12} />
-                    <Tooltip 
+                    <RechartsTooltip 
                       contentStyle={{ 
                         backgroundColor: 'white', 
                         border: '1px solid #e2e8f0',
@@ -3728,7 +3678,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                 <XAxis type="number" stroke="#64748b" fontSize={12} />
                 <YAxis dataKey="intervention" type="category" stroke="#64748b" fontSize={12} width={120} />
-                <Tooltip 
+                <RechartsTooltip 
                   contentStyle={{ 
                     backgroundColor: 'white', 
                     border: '1px solid #e2e8f0',
@@ -3827,7 +3777,7 @@ export default function Dashboard() {
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -3859,7 +3809,7 @@ export default function Dashboard() {
                     tick={{ fontSize: 12 }}
                     stroke="#64748b"
                   />
-                  <Tooltip 
+                  <RechartsTooltip 
                     contentStyle={{ 
                       backgroundColor: 'white', 
                       border: '1px solid #e2e8f0',
@@ -3962,7 +3912,7 @@ export default function Dashboard() {
                   tick={{ fontSize: 12 }}
                   stroke="#64748b"
                 />
-                <Tooltip 
+                <RechartsTooltip 
                   contentStyle={{ 
                     backgroundColor: 'white', 
                     border: '1px solid #e2e8f0',
@@ -3979,26 +3929,695 @@ export default function Dashboard() {
     )
   }
 
-  const renderComingSoon = (sectionName: string) => (
-    <div className="flex items-center justify-center h-full min-h-[400px]">
-      <Card className="w-full max-w-md border-2 border-blue-200 shadow-lg">
-        <CardHeader className="bg-blue-50">
-          <CardTitle className="text-slate-800">Coming Soon</CardTitle>
-          <CardDescription className="text-slate-600">
-            The {sectionName} section is under development.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-6">
-          <p className="text-slate-700">
-            This section will provide comprehensive tools and insights for the DISHA platform.
-          </p>
-        </CardContent>
-      </Card>
-    </div>
-  )
+  const renderStateAnalytics = () => {
+    // Sample district performance data
+    const districtPerformanceData = [
+      { district: 'Jaipur', enrollment: 92, retention: 88, completion: 85, infrastructure: 90, budget: 95, performance: 87 },
+      { district: 'Jodhpur', enrollment: 89, retention: 85, completion: 82, infrastructure: 85, budget: 88, performance: 84 },
+      { district: 'Udaipur', enrollment: 91, retention: 87, completion: 84, infrastructure: 88, budget: 90, performance: 86 },
+      { district: 'Kota', enrollment: 94, retention: 90, completion: 88, infrastructure: 92, budget: 93, performance: 90 },
+      { district: 'Bikaner', enrollment: 86, retention: 82, completion: 79, infrastructure: 80, budget: 85, performance: 81 },
+      { district: 'Ajmer', enrollment: 88, retention: 84, completion: 81, infrastructure: 83, budget: 87, performance: 83 },
+      { district: 'Alwar', enrollment: 87, retention: 83, completion: 80, infrastructure: 82, budget: 86, performance: 82 },
+      { district: 'Bharatpur', enrollment: 85, retention: 81, completion: 78, infrastructure: 79, budget: 84, performance: 80 }
+    ]
 
+    const enrollmentTrendData = [
+      { year: '2019-20', primary: 2.8, secondary: 1.2, higher: 0.8 },
+      { year: '2020-21', primary: 2.9, secondary: 1.3, higher: 0.9 },
+      { year: '2021-22', primary: 3.1, secondary: 1.4, higher: 1.0 },
+      { year: '2022-23', primary: 3.3, secondary: 1.5, higher: 1.1 },
+      { year: '2023-24', primary: 3.5, secondary: 1.6, higher: 1.2 }
+    ]
+
+    const budgetAnalysisData = [
+      { category: 'Infrastructure', allocated: 450, utilized: 420, percentage: 93 },
+      { category: 'Teacher Training', allocated: 280, utilized: 265, percentage: 95 },
+      { category: 'Digital Learning', allocated: 320, utilized: 298, percentage: 93 },
+      { category: 'Student Welfare', allocated: 180, utilized: 172, percentage: 96 },
+      { category: 'Research & Development', allocated: 150, utilized: 135, percentage: 90 }
+    ]
+
+    return (
+      <div className="space-y-6">
+        {/* State Analytics Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
+          <h2 className="text-2xl font-bold mb-2">{t.stateAnalytics}</h2>
+          <p className="text-blue-100">Comprehensive district-wise performance analysis and comparative insights</p>
+        </div>
+
+        {/* Key Performance Indicators */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-green-600 text-sm font-medium">State Average Enrollment</p>
+                  <p className="text-2xl font-bold text-green-800">89.2%</p>
+                  <p className="text-xs text-green-600 mt-1">↑ 2.3% from last year</p>
+                </div>
+                <TrendingUp className="h-8 w-8 text-green-600" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-blue-600 text-sm font-medium">Average Retention Rate</p>
+                  <p className="text-2xl font-bold text-blue-800">85.0%</p>
+                  <p className="text-xs text-blue-600 mt-1">↑ 1.8% from last year</p>
+                </div>
+                <Users className="h-8 w-8 text-blue-600" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-purple-600 text-sm font-medium">Budget Utilization</p>
+                  <p className="text-2xl font-bold text-purple-800">93.4%</p>
+                  <p className="text-xs text-purple-600 mt-1">↑ 4.2% from last year</p>
+                </div>
+                <BarChart3 className="h-8 w-8 text-purple-600" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-orange-600 text-sm font-medium">Infrastructure Score</p>
+                  <p className="text-2xl font-bold text-orange-800">86.1%</p>
+                  <p className="text-xs text-orange-600 mt-1">↑ 3.5% from last year</p>
+                </div>
+                <Settings className="h-8 w-8 text-orange-600" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* District Performance Comparison */}
+        <Card className="border-2 border-slate-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50">
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="h-5 w-5 text-blue-600" />
+              {t.districtComparison}
+            </CardTitle>
+            <CardDescription>Comprehensive performance metrics across all districts</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="h-96">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={districtPerformanceData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                  <XAxis dataKey="district" stroke="#64748b" fontSize={12} />
+                  <YAxis stroke="#64748b" fontSize={12} />
+                  <RechartsTooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #e2e8f0', 
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                    }} 
+                  />
+                  <Legend />
+                  <Bar dataKey="enrollment" fill="#3b82f6" name="Enrollment %" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="retention" fill="#10b981" name="Retention %" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="completion" fill="#f59e0b" name="Completion %" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="performance" fill="#8b5cf6" name="Performance %" radius={[2, 2, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Enrollment Trends and Budget Analysis */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Enrollment Trends */}
+          <Card className="border-2 border-green-200 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-green-600" />
+                {t.enrollmentTrends}
+              </CardTitle>
+              <CardDescription>5-year enrollment growth across education levels</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={enrollmentTrendData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis dataKey="year" stroke="#64748b" fontSize={12} />
+                    <YAxis stroke="#64748b" fontSize={12} />
+                    <RechartsTooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid #e2e8f0', 
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                      }} 
+                    />
+                    <Legend />
+                    <Line type="monotone" dataKey="primary" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }} name="Primary (M)" />
+                    <Line type="monotone" dataKey="secondary" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', strokeWidth: 2, r: 4 }} name="Secondary (M)" />
+                    <Line type="monotone" dataKey="higher" stroke="#f59e0b" strokeWidth={3} dot={{ fill: '#f59e0b', strokeWidth: 2, r: 4 }} name="Higher Ed (M)" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Budget Analysis */}
+          <Card className="border-2 border-purple-200 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50">
+              <CardTitle className="flex items-center gap-2">
+                <FileBarChart className="h-5 w-5 text-purple-600" />
+                {t.budgetAnalysis}
+              </CardTitle>
+              <CardDescription>Budget allocation vs utilization by category</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                {budgetAnalysisData.map((item, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-slate-700">{item.category}</span>
+                      <span className="text-sm text-slate-600">₹{item.utilized}Cr / ₹{item.allocated}Cr</span>
+                    </div>
+                    <div className="w-full bg-slate-200 rounded-full h-2">
+                      <div 
+                        className={`h-2 rounded-full ${
+                          item.percentage >= 95 ? 'bg-green-500' :
+                          item.percentage >= 90 ? 'bg-blue-500' :
+                          item.percentage >= 85 ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${item.percentage}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-slate-500">Utilization: {item.percentage}%</span>
+                      <Badge variant={item.percentage >= 90 ? 'default' : 'secondary'}>
+                        {item.percentage >= 95 ? 'Excellent' :
+                         item.percentage >= 90 ? 'Good' :
+                         item.percentage >= 85 ? 'Average' : 'Needs Attention'}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* District Performance Table */}
+        <Card className="border-2 border-slate-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50">
+            <CardTitle className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-blue-600" />
+              Detailed District Performance Matrix
+            </CardTitle>
+            <CardDescription>Comprehensive metrics for all districts in Rajasthan</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="font-semibold">District</TableHead>
+                    <TableHead className="text-center font-semibold">Enrollment %</TableHead>
+                    <TableHead className="text-center font-semibold">Retention %</TableHead>
+                    <TableHead className="text-center font-semibold">Completion %</TableHead>
+                    <TableHead className="text-center font-semibold">Infrastructure</TableHead>
+                    <TableHead className="text-center font-semibold">Budget Util %</TableHead>
+                    <TableHead className="text-center font-semibold">Overall Score</TableHead>
+                    <TableHead className="text-center font-semibold">Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {districtPerformanceData.map((district, index) => (
+                    <TableRow key={index} className="hover:bg-slate-50">
+                      <TableCell className="font-medium">{district.district}</TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={district.enrollment >= 90 ? 'default' : 'secondary'}>
+                          {district.enrollment}%
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={district.retention >= 85 ? 'default' : 'secondary'}>
+                          {district.retention}%
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={district.completion >= 80 ? 'default' : 'secondary'}>
+                          {district.completion}%
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={district.infrastructure >= 85 ? 'default' : 'secondary'}>
+                          {district.infrastructure}%
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={district.budget >= 90 ? 'default' : 'secondary'}>
+                          {district.budget}%
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center">
+                          <div className={`w-3 h-3 rounded-full mr-2 ${
+                            district.performance >= 85 ? 'bg-green-500' :
+                            district.performance >= 80 ? 'bg-yellow-500' : 'bg-red-500'
+                          }`}></div>
+                          {district.performance}%
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={
+                          district.performance >= 85 ? 'default' :
+                          district.performance >= 80 ? 'secondary' : 'destructive'
+                        }>
+                          {district.performance >= 85 ? 'Excellent' :
+                           district.performance >= 80 ? 'Good' : 'Needs Improvement'}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+
+
+  const renderSystemAdmin = () => {
+    // Sample system administration data
+    const systemUsers = [
+      { id: 1, name: 'Dr. Rajesh Kumar', email: 'rajesh.kumar@rajasthan.gov.in', role: 'System Administrator', status: 'Active', lastLogin: '2024-01-15 09:30', department: 'IT Department' },
+      { id: 2, name: 'Ms. Priya Sharma', email: 'priya.sharma@rajasthan.gov.in', role: 'Data Analyst', status: 'Active', lastLogin: '2024-01-15 08:45', department: 'Analytics Team' },
+      { id: 3, name: 'Mr. Amit Singh', email: 'amit.singh@rajasthan.gov.in', role: 'Report Manager', status: 'Active', lastLogin: '2024-01-14 16:20', department: 'Reports Division' },
+      { id: 4, name: 'Dr. Sunita Gupta', email: 'sunita.gupta@rajasthan.gov.in', role: 'Policy Advisor', status: 'Inactive', lastLogin: '2024-01-10 14:15', department: 'Policy Planning' },
+      { id: 5, name: 'Mr. Vikram Joshi', email: 'vikram.joshi@rajasthan.gov.in', role: 'District Coordinator', status: 'Active', lastLogin: '2024-01-15 07:30', department: 'Field Operations' }
+    ]
+
+    const systemRoles = [
+      { id: 1, name: 'System Administrator', permissions: 15, users: 2, description: 'Full system access and configuration' },
+      { id: 2, name: 'Data Analyst', permissions: 8, users: 5, description: 'Data analysis and reporting access' },
+      { id: 3, name: 'Report Manager', permissions: 6, users: 3, description: 'Report generation and distribution' },
+      { id: 4, name: 'Policy Advisor', permissions: 4, users: 4, description: 'Policy analysis and recommendations' },
+      { id: 5, name: 'District Coordinator', permissions: 3, users: 12, description: 'District-level data access' }
+    ]
+
+    const systemMetrics = {
+      totalUsers: 26,
+      activeUsers: 22,
+      systemUptime: '99.8%',
+      dataBackupStatus: 'Completed',
+      lastBackup: '2024-01-15 02:00',
+      storageUsed: '78%',
+      apiCalls: 15420,
+      errorRate: '0.2%'
+    }
+
+    const auditLogs = [
+      { id: 1, user: 'Dr. Rajesh Kumar', action: 'User Role Modified', target: 'Ms. Priya Sharma', timestamp: '2024-01-15 10:30', status: 'Success' },
+      { id: 2, user: 'System', action: 'Automated Backup', target: 'Database', timestamp: '2024-01-15 02:00', status: 'Success' },
+      { id: 3, user: 'Mr. Amit Singh', action: 'Report Generated', target: 'Monthly Performance Report', timestamp: '2024-01-14 16:45', status: 'Success' },
+      { id: 4, user: 'Dr. Sunita Gupta', action: 'Login Attempt', target: 'System Access', timestamp: '2024-01-14 09:15', status: 'Failed' },
+      { id: 5, user: 'System', action: 'Security Scan', target: 'All Modules', timestamp: '2024-01-14 01:00', status: 'Success' }
+    ]
+
+    return (
+      <div className="space-y-6">
+        {/* System Administration Header */}
+        <div className="bg-gradient-to-r from-slate-700 to-slate-900 rounded-xl p-6 text-white">
+          <h2 className="text-2xl font-bold mb-2">{t.systemAdmin}</h2>
+          <p className="text-slate-200">User management, role-based access control, and system monitoring</p>
+        </div>
+
+        {/* System Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-blue-600 text-sm font-medium">Total Users</p>
+                  <p className="text-2xl font-bold text-blue-800">{systemMetrics.totalUsers}</p>
+                  <p className="text-xs text-blue-600 mt-1">{systemMetrics.activeUsers} active</p>
+                </div>
+                <Users className="h-8 w-8 text-blue-600" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-green-600 text-sm font-medium">System Uptime</p>
+                  <p className="text-2xl font-bold text-green-800">{systemMetrics.systemUptime}</p>
+                  <p className="text-xs text-green-600 mt-1">Last 30 days</p>
+                </div>
+                <Activity className="h-8 w-8 text-green-600" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-purple-600 text-sm font-medium">Storage Used</p>
+                  <p className="text-2xl font-bold text-purple-800">{systemMetrics.storageUsed}</p>
+                  <p className="text-xs text-purple-600 mt-1">of total capacity</p>
+                </div>
+                <Database className="h-8 w-8 text-purple-600" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-orange-600 text-sm font-medium">API Calls</p>
+                  <p className="text-2xl font-bold text-orange-800">{systemMetrics.apiCalls.toLocaleString()}</p>
+                  <p className="text-xs text-orange-600 mt-1">Today ({systemMetrics.errorRate} error rate)</p>
+                </div>
+                <Server className="h-8 w-8 text-orange-600" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Quick Actions */}
+        <Card className="border-2 border-slate-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50">
+            <CardTitle className="flex items-center gap-2">
+              <Settings className="h-5 w-5 text-slate-600" />
+              System Management
+            </CardTitle>
+            <CardDescription>Quick access to system administration tools</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Button className="h-20 flex-col gap-2 bg-slate-700 hover:bg-slate-800">
+                <Users className="h-6 w-6" />
+                <span>Add User</span>
+              </Button>
+              <Button variant="outline" className="h-20 flex-col gap-2 border-blue-200 text-blue-700 hover:bg-blue-50">
+                <Shield className="h-6 w-6" />
+                <span>Manage Roles</span>
+              </Button>
+              <Button variant="outline" className="h-20 flex-col gap-2 border-green-200 text-green-700 hover:bg-green-50">
+                <Database className="h-6 w-6" />
+                <span>Backup Data</span>
+              </Button>
+              <Button variant="outline" className="h-20 flex-col gap-2 border-purple-200 text-purple-700 hover:bg-purple-50">
+                <Activity className="h-6 w-6" />
+                <span>System Monitor</span>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* User Management and Role Management */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* User Management */}
+          <Card className="border-2 border-blue-200 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-blue-600" />
+                User Management
+              </CardTitle>
+              <CardDescription>Manage system users and their access</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                {systemUsers.map((user) => (
+                  <div key={user.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-10 w-10">
+                        <AvatarFallback className="bg-blue-100 text-blue-700">
+                          {user.name.split(' ').map(n => n[0]).join('')}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-slate-800">{user.name}</h4>
+                        <div className="flex items-center gap-4 mt-1">
+                          <Badge variant="outline" className="text-xs">{user.role}</Badge>
+                          <span className="text-xs text-slate-500">{user.department}</span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-1">Last login: {user.lastLogin}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={user.status === 'Active' ? 'default' : 'secondary'}>
+                        {user.status}
+                      </Badge>
+                      <Button size="sm" variant="ghost">
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Role Management */}
+          <Card className="border-2 border-green-200 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-green-600" />
+                Role Management
+              </CardTitle>
+              <CardDescription>Configure roles and permissions</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                {systemRoles.map((role) => (
+                  <div key={role.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                    <div className="flex-1">
+                      <h4 className="font-medium text-slate-800">{role.name}</h4>
+                      <p className="text-sm text-slate-600 mt-1">{role.description}</p>
+                      <div className="flex items-center gap-4 mt-2">
+                        <div className="flex items-center gap-1">
+                          <UserCheck className="h-4 w-4 text-blue-500" />
+                          <span className="text-xs text-slate-500">{role.users} users</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          <span className="text-xs text-slate-500">{role.permissions} permissions</span>
+                        </div>
+                      </div>
+                    </div>
+                    <Button size="sm" variant="ghost">
+                      <Settings className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* System Monitoring */}
+        <Card className="border-2 border-purple-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50">
+            <CardTitle className="flex items-center gap-2">
+              <Activity className="h-5 w-5 text-purple-600" />
+              System Monitoring
+            </CardTitle>
+            <CardDescription>Real-time system performance and health metrics</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-slate-700">CPU Usage</span>
+                  <span className="text-sm text-slate-600">45%</span>
+                </div>
+                <Progress value={45} className="h-2" />
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-slate-700">Memory Usage</span>
+                  <span className="text-sm text-slate-600">62%</span>
+                </div>
+                <Progress value={62} className="h-2" />
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-slate-700">Disk Usage</span>
+                  <span className="text-sm text-slate-600">78%</span>
+                </div>
+                <Progress value={78} className="h-2" />
+              </div>
+            </div>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="text-center p-4 bg-blue-50 rounded-lg">
+                <div className="text-lg font-bold text-blue-800">24/7</div>
+                <div className="text-sm text-blue-600">Monitoring</div>
+              </div>
+              <div className="text-center p-4 bg-green-50 rounded-lg">
+                <div className="text-lg font-bold text-green-800">{systemMetrics.dataBackupStatus}</div>
+                <div className="text-sm text-green-600">Last Backup</div>
+              </div>
+              <div className="text-center p-4 bg-purple-50 rounded-lg">
+                <div className="text-lg font-bold text-purple-800">SSL</div>
+                <div className="text-sm text-purple-600">Encrypted</div>
+              </div>
+              <div className="text-center p-4 bg-orange-50 rounded-lg">
+                <div className="text-lg font-bold text-orange-800">Auto</div>
+                <div className="text-sm text-orange-600">Updates</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Audit Logs */}
+        <Card className="border-2 border-slate-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50">
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-slate-600" />
+              Audit Logs
+            </CardTitle>
+            <CardDescription>System activity and security audit trail</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="font-semibold">User</TableHead>
+                    <TableHead className="font-semibold">Action</TableHead>
+                    <TableHead className="font-semibold">Target</TableHead>
+                    <TableHead className="text-center font-semibold">Timestamp</TableHead>
+                    <TableHead className="text-center font-semibold">Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {auditLogs.map((log) => (
+                    <TableRow key={log.id} className="hover:bg-slate-50">
+                      <TableCell className="font-medium">{log.user}</TableCell>
+                      <TableCell className="text-sm text-slate-600">{log.action}</TableCell>
+                      <TableCell className="text-sm text-slate-600">{log.target}</TableCell>
+                      <TableCell className="text-center text-sm text-slate-600">{log.timestamp}</TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={log.status === 'Success' ? 'default' : 'destructive'}>
+                          {log.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Security Settings */}
+        <Card className="border-2 border-red-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-red-50 to-pink-50">
+            <CardTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-red-600" />
+              Security Settings
+            </CardTitle>
+            <CardDescription>System security configuration and alerts</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-3">
+                <h4 className="font-medium text-slate-800">Authentication</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Two-Factor Authentication</span>
+                    <Switch checked={true} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Password Complexity</span>
+                    <Switch checked={true} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Session Timeout</span>
+                    <Switch checked={true} />
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <h4 className="font-medium text-slate-800">Data Protection</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Data Encryption</span>
+                    <Switch checked={true} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Backup Encryption</span>
+                    <Switch checked={true} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Audit Logging</span>
+                    <Switch checked={true} />
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <h4 className="font-medium text-slate-800">Access Control</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">IP Restrictions</span>
+                    <Switch checked={false} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">Role-based Access</span>
+                    <Switch checked={true} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-600">API Rate Limiting</span>
+                    <Switch checked={true} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  const renderComingSoon = (sectionName: string) => {
+    return (
+      <div className="flex items-center justify-center h-full min-h-[400px]">
+        <Card className="w-full max-w-md border-2 border-blue-200 shadow-lg">
+          <CardHeader className="bg-blue-50">
+            <CardTitle className="text-slate-800">Coming Soon</CardTitle>
+            <CardDescription className="text-slate-600">
+              The {sectionName} section is under development.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <p className="text-slate-700">
+              This section will provide comprehensive tools and insights for the DISHA platform.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // Main dashboard return
   return (
-    <div className="flex h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-amber-50/20">
+    <TooltipProvider>
+      <div className="flex h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-amber-50/20">
       {/* Mobile Sidebar Overlay */}
       {isMobile && sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
@@ -4014,21 +4633,34 @@ export default function Dashboard() {
                   <p className="text-xs text-amber-100 font-medium">Ministry Dashboard</p>
                 </div>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)} className="text-white hover:bg-white/20">
-                <X className="h-5 w-5" />
-              </Button>
+              <UITooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={() => setSidebarOpen(false)} 
+                    className="text-white hover:bg-white/20 active:bg-white/30 touch-manipulation min-h-[44px] min-w-[44px]"
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-slate-800 text-white border-slate-600">
+                  <p className="text-sm">Close menu</p>
+                </TooltipContent>
+              </UITooltip>
             </div>
             <nav className="p-6 space-y-1">
               {navigationItems.map((item) => {
                 const Icon = item.icon
                 return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setActiveSection(item.id)
+                  <UITooltip key={item.id}>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setActiveSection(item.id)
                       setSidebarOpen(false)
                     }}
-                    className={`flex items-center w-full px-4 py-3.5 text-sm font-medium rounded-xl transition-all duration-300 group ${
+                    className={`flex items-center w-full px-4 py-4 text-sm font-medium rounded-xl transition-all duration-300 group touch-manipulation min-h-[48px] ${
                       activeSection === item.id
                         ? "bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-100 border-l-4 border-amber-400 shadow-lg backdrop-blur-sm"
                         : "text-slate-300 hover:bg-slate-700/50 hover:text-amber-100 hover:shadow-md"
@@ -4039,6 +4671,11 @@ export default function Dashboard() {
                     }`} />
                     <span className="font-medium tracking-wide">{item.label}</span>
                   </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right" className="bg-slate-800 text-white border-slate-600">
+                      <p className="text-sm">{getTooltipContent(item.id)}</p>
+                    </TooltipContent>
+                  </UITooltip>
                 )
               })}
             </nav>
@@ -4067,10 +4704,11 @@ export default function Dashboard() {
             {navigationItems.map((item) => {
               const Icon = item.icon
               return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveSection(item.id)}
-                  className={`flex items-center w-full px-4 py-3.5 text-sm font-medium rounded-xl transition-all duration-300 group ${
+                <UITooltip key={item.id}>
+                  <TooltipTrigger asChild>
+                    <button
+                       onClick={() => setActiveSection(item.id)}
+                    className={`flex items-center w-full px-4 py-4 text-sm font-medium rounded-xl transition-all duration-300 group touch-manipulation min-h-[48px] ${
                     activeSection === item.id
                       ? "bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-100 border-l-4 border-amber-400 shadow-lg backdrop-blur-sm"
                       : "text-slate-300 hover:bg-slate-700/50 hover:text-amber-100 hover:shadow-md"
@@ -4081,6 +4719,11 @@ export default function Dashboard() {
                   }`} />
                   <span className="font-medium tracking-wide">{item.label}</span>
                 </button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right" className="bg-slate-800 text-white border-slate-600">
+                    <p className="text-sm">{getTooltipContent(item.id)}</p>
+                  </TooltipContent>
+                </UITooltip>
               )
             })}
           </nav>
@@ -4093,9 +4736,21 @@ export default function Dashboard() {
           <div className="flex items-center justify-between px-6 py-5 md:px-8">
             <div className="flex items-center space-x-4">
               {isMobile && (
-                <Button variant="ghost" size="icon" className="mr-2 hover:bg-slate-100" onClick={() => setSidebarOpen(true)}>
-                  <Menu className="h-5 w-5 text-slate-600" />
-                </Button>
+                <UITooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="mr-2 hover:bg-slate-100 active:bg-slate-200 touch-manipulation" 
+                      onClick={() => setSidebarOpen(true)}
+                    >
+                      <Menu className="h-5 w-5 text-slate-600" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-slate-800 text-white border-slate-600">
+                    <p className="text-sm">Open navigation menu</p>
+                  </TooltipContent>
+                </UITooltip>
               )}
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center shadow-md">
@@ -4113,6 +4768,22 @@ export default function Dashboard() {
               <div className="text-sm text-slate-600 hidden md:block">
                 {t.lastUpdated}: {lastUpdated.toLocaleTimeString()}
               </div>
+            
+
+              {/* Help Button */}
+              <UITooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hover:bg-slate-100 transition-colors duration-200">
+                    <HelpCircle className="h-5 w-5 text-slate-600" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-slate-800 text-white border-slate-600 max-w-xs">
+                  <div className="space-y-2">
+                    <p className="font-medium text-sm">Dashboard Help</p>
+                    <p className="text-xs text-slate-300">Navigate using the sidebar menu. Hover over items for detailed descriptions. Use filters to drill down into specific data.</p>
+                  </div>
+                </TooltipContent>
+              </UITooltip>
 
               {/* Language Switcher */}
               <DropdownMenu>
@@ -4139,10 +4810,17 @@ export default function Dashboard() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Button variant="ghost" size="icon" className="relative hover:bg-slate-100 transition-colors duration-200">
-                <Bell className="h-5 w-5 text-slate-600" />
-                <span className="absolute -top-1 -right-1 h-3 w-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full border-2 border-white shadow-sm"></span>
-              </Button>
+              <UITooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" className="relative hover:bg-slate-100 transition-colors duration-200">
+                    <Bell className="h-5 w-5 text-slate-600" />
+                    <span className="absolute -top-1 -right-1 h-3 w-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full border-2 border-white shadow-sm"></span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-slate-800 text-white border-slate-600">
+                  <p className="text-sm">Notifications (3 new)</p>
+                </TooltipContent>
+              </UITooltip>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -4166,16 +4844,19 @@ export default function Dashboard() {
         {/* Main Content Area */}
         <main className="flex-1 overflow-y-auto p-6 md:p-8 bg-gradient-to-b from-transparent to-slate-50/50">
           {activeSection === "overview" && renderOverview()}
-          {activeSection === "regions" && renderRegionsDistricts()}
+          {activeSection === "state-analytics" && renderStateAnalytics()}
+          {activeSection === "regions" && renderStateAnalytics()}
           {activeSection === "universities" && renderUniversities()}
           {activeSection === "teachers" && renderTeachers()}
           {activeSection === "students" && renderStudents()}
           {activeSection === "ai-insights" && renderAIInsights()}
           {activeSection === "counselling" && renderCounselling()}
           {activeSection === "reports" && renderReports()}
+          {activeSection === "system-admin" && renderSystemAdmin()}
           {activeSection === "settings" && renderSettings()}
         </main>
       </div>
     </div>
+    </TooltipProvider>
   )
 }
