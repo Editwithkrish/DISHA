@@ -6,8 +6,8 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'DISHA - Dropout Insight & Support for Holistic Academics',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  description: 'A system that predicts student dropout risks using academic and non-academic insights, and provides personalized academic, emotional, and career support to improve retention and overall growth.',
+  generator: 'Disha',
 }
 
 export default function RootLayout({
