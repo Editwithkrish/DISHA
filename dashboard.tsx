@@ -50,7 +50,13 @@ import {
   Move,
   RotateCcw,
   Save,
-  Check
+  Check,
+  Home,
+  LogOut,
+  Sun,
+  Moon,
+  Maximize2,
+  Minimize2
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -237,6 +243,8 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [language, setLanguage] = useState<Language>("en")
   const [lastUpdated, setLastUpdated] = useState(new Date())
+  const [darkMode, setDarkMode] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   
   // Comprehensive hierarchical filter states
   const [selectedLevel, setSelectedLevel] = useState('state') // state, district, institution
@@ -4617,7 +4625,7 @@ export default function Dashboard() {
   // Main dashboard return
   return (
     <TooltipProvider>
-      <div className="flex h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-amber-50/20">
+      <div className={`flex h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-amber-50/20'}`}>
       {/* Mobile Sidebar Overlay */}
       {isMobile && sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
@@ -4684,23 +4692,41 @@ export default function Dashboard() {
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0">
-        <div className="flex flex-col flex-grow bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-r border-slate-700 shadow-2xl">
-          <div className="flex items-center px-6 py-6 bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 border-b border-amber-400/20">
-            <div className="text-white">
-              <div className="flex items-center space-x-3">
+      <div className={`hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 transition-all duration-300 ${isFullscreen ? 'lg:w-16' : 'lg:w-72'}`}>
+        <div className={`flex flex-col flex-grow transition-all duration-300 shadow-2xl ${
+          darkMode 
+            ? 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-r border-slate-700' 
+            : 'bg-gradient-to-b from-white via-slate-50 to-white border-r border-slate-200'
+        }`}>
+          <div className={`flex items-center px-6 py-6 border-b transition-all duration-300 ${
+            darkMode 
+              ? 'bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 border-amber-400/20' 
+              : 'bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-500 border-blue-400/20'
+          }`}>
+            <div className={`transition-all duration-300 ${
+              darkMode ? 'text-white' : 'text-white'
+            }`}>
+              <div className={`flex items-center space-x-3 ${isFullscreen ? 'justify-center' : ''}`}>
                 <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
                   <GraduationCap className="h-6 w-6 text-white" />
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold tracking-wide">DISHA</h1>
-                  <p className="text-xs text-amber-100 mt-0.5 font-medium">Ministry Dashboard</p>
-                </div>
+                {!isFullscreen && (
+                  <div>
+                    <h1 className="text-xl font-bold tracking-wide">DISHA</h1>
+                    <p className={`text-xs mt-0.5 font-medium ${
+                      darkMode ? 'text-amber-100' : 'text-blue-100'
+                    }`}>Ministry Dashboard</p>
+                  </div>
+                )}
               </div>
-              <p className="text-xs text-amber-50/90 mt-2 leading-relaxed">{t.subtitle}</p>
+              {!isFullscreen && (
+                <p className={`text-xs mt-2 leading-relaxed ${
+                  darkMode ? 'text-amber-50/90' : 'text-blue-50/90'
+                }`}>{t.subtitle}</p>
+              )}
             </div>
           </div>
-          <nav className="flex-1 px-4 py-6 space-y-1">
+          <nav className={`flex-1 px-4 py-6 space-y-1 ${isFullscreen ? 'px-2' : 'px-4'}`}>
             {navigationItems.map((item) => {
               const Icon = item.icon
               return (
@@ -4708,19 +4734,33 @@ export default function Dashboard() {
                   <TooltipTrigger asChild>
                     <button
                        onClick={() => setActiveSection(item.id)}
-                    className={`flex items-center w-full px-4 py-4 text-sm font-medium rounded-xl transition-all duration-300 group touch-manipulation min-h-[48px] ${
-                    activeSection === item.id
-                      ? "bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-100 border-l-4 border-amber-400 shadow-lg backdrop-blur-sm"
-                      : "text-slate-300 hover:bg-slate-700/50 hover:text-amber-100 hover:shadow-md"
-                  }`}
+                    className={`flex items-center w-full text-sm font-medium rounded-xl transition-all duration-300 group touch-manipulation min-h-[48px] ${
+                      isFullscreen ? 'px-2 py-3 justify-center' : 'px-4 py-4'
+                    } ${
+                      activeSection === item.id
+                        ? darkMode 
+                          ? "bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-100 border-l-4 border-amber-400 shadow-lg backdrop-blur-sm"
+                          : "bg-gradient-to-r from-blue-500/20 to-indigo-500/20 text-blue-700 border-l-4 border-blue-500 shadow-lg backdrop-blur-sm"
+                        : darkMode
+                          ? "text-slate-300 hover:bg-slate-700/50 hover:text-amber-100 hover:shadow-md"
+                          : "text-slate-600 hover:bg-slate-100/80 hover:text-blue-700 hover:shadow-md"
+                    }`}
                 >
-                  <Icon className={`mr-4 h-5 w-5 transition-all duration-300 ${
-                    activeSection === item.id ? "text-amber-300" : "text-slate-400 group-hover:text-amber-200"
+                  <Icon className={`h-5 w-5 transition-all duration-300 ${
+                    isFullscreen ? '' : 'mr-4'
+                  } ${
+                    activeSection === item.id 
+                      ? darkMode ? "text-amber-300" : "text-blue-600"
+                      : darkMode ? "text-slate-400 group-hover:text-amber-200" : "text-slate-500 group-hover:text-blue-600"
                   }`} />
-                  <span className="font-medium tracking-wide">{item.label}</span>
+                  {!isFullscreen && (
+                    <span className="font-medium tracking-wide">{item.label}</span>
+                  )}
                 </button>
                   </TooltipTrigger>
-                  <TooltipContent side="right" className="bg-slate-800 text-white border-slate-600">
+                  <TooltipContent side="right" className={`${
+                    darkMode ? 'bg-slate-800 text-white border-slate-600' : 'bg-white text-slate-900 border-slate-200'
+                  }`}>
                     <p className="text-sm">{getTooltipContent(item.id)}</p>
                   </TooltipContent>
                 </UITooltip>
@@ -4731,8 +4771,14 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:ml-72">
-        <header className="bg-gradient-to-r from-slate-50 via-white to-slate-50 border-b border-slate-200 shadow-lg backdrop-blur-sm">
+      <div className={`flex-1 flex flex-col transition-all duration-300 ${
+        isFullscreen ? 'lg:ml-16' : 'lg:ml-72'
+      }`}>
+        <header className={`border-b shadow-lg backdrop-blur-sm transition-all duration-300 ${
+          darkMode 
+            ? 'bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800 border-slate-700' 
+            : 'bg-gradient-to-r from-slate-50 via-white to-slate-50 border-slate-200'
+        }`}>
           <div className="flex items-center justify-between px-6 py-5 md:px-8">
             <div className="flex items-center space-x-4">
               {isMobile && (
@@ -4741,40 +4787,93 @@ export default function Dashboard() {
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="mr-2 hover:bg-slate-100 active:bg-slate-200 touch-manipulation" 
+                      className={`mr-2 touch-manipulation transition-all duration-300 ${
+                        darkMode 
+                          ? 'hover:bg-slate-700 active:bg-slate-600 text-slate-300' 
+                          : 'hover:bg-slate-100 active:bg-slate-200 text-slate-600'
+                      }`}
                       onClick={() => setSidebarOpen(true)}
                     >
-                      <Menu className="h-5 w-5 text-slate-600" />
+                      <Menu className="h-5 w-5" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-slate-800 text-white border-slate-600">
+                  <TooltipContent className={`${
+                    darkMode ? 'bg-slate-800 text-white border-slate-600' : 'bg-white text-slate-900 border-slate-200'
+                  }`}>
                     <p className="text-sm">Open navigation menu</p>
                   </TooltipContent>
                 </UITooltip>
               )}
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center shadow-md">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-md transition-all duration-300 ${
+                  darkMode 
+                    ? 'bg-gradient-to-br from-amber-500 to-orange-600' 
+                    : 'bg-gradient-to-br from-blue-500 to-indigo-600'
+                }`}>
                   <GraduationCap className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-slate-800 tracking-tight">
+                  <h1 className={`text-2xl font-bold tracking-tight transition-all duration-300 ${
+                    darkMode ? 'text-slate-100' : 'text-slate-800'
+                  }`}>
                     {navigationItems.find((item) => item.id === activeSection)?.label || t.overview}
                   </h1>
-                  <p className="text-sm text-slate-500 font-medium">Education Ministry of Rajasthan</p>
+                  <p className={`text-sm font-medium transition-all duration-300 ${
+                    darkMode ? 'text-slate-400' : 'text-slate-500'
+                  }`}>Education Ministry of Rajasthan</p>
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-slate-600 hidden md:block">
+            <div className="flex items-center space-x-3">
+              <div className={`text-sm hidden md:block font-medium transition-all duration-300 ${
+                darkMode ? 'text-slate-300' : 'text-slate-600'
+              }`}>
                 {t.lastUpdated}: {lastUpdated.toLocaleTimeString()}
               </div>
             
+              {/* Dark Mode Toggle */}
+              <UITooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className={`transition-all duration-300 ${darkMode ? 'hover:bg-slate-700 text-slate-300' : 'hover:bg-slate-100 text-slate-600'}`}
+                    onClick={() => setDarkMode(!darkMode)}
+                  >
+                    {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-slate-800 text-white border-slate-600">
+                  <p className="text-sm">{darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</p>
+                </TooltipContent>
+              </UITooltip>
+
+              {/* Fullscreen Toggle */}
+              <UITooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className={`transition-all duration-300 ${darkMode ? 'hover:bg-slate-700 text-slate-300' : 'hover:bg-slate-100 text-slate-600'}`}
+                    onClick={() => setIsFullscreen(!isFullscreen)}
+                  >
+                    {isFullscreen ? <Minimize2 className="h-5 w-5" /> : <Maximize2 className="h-5 w-5" />}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-slate-800 text-white border-slate-600">
+                  <p className="text-sm">{isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}</p>
+                </TooltipContent>
+              </UITooltip>
 
               {/* Help Button */}
               <UITooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hover:bg-slate-100 transition-colors duration-200">
-                    <HelpCircle className="h-5 w-5 text-slate-600" />
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className={`transition-all duration-300 ${darkMode ? 'hover:bg-slate-700 text-slate-300' : 'hover:bg-slate-100 text-slate-600'}`}
+                  >
+                    <HelpCircle className="h-5 w-5" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="bg-slate-800 text-white border-slate-600 max-w-xs">
