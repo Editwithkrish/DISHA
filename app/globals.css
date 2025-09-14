@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Updated color tokens for Rajasthan Education Ministry government portal design */
+    --background: 0 0% 100%;
+    --foreground: 215 25% 27%;
+
+    --card: 120 60% 97%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 210 40% 96%;
+    --popover-foreground: 215 25% 27%;
+
+    --primary: 84 81% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 120 60% 97%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 25% 27%;
+
+    --accent: 84 81% 44%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 0 0% 100%;
+    --ring: 84 81% 44%;
+
+    --chart-1: 160 84% 39%;
+    --chart-2: 188 95% 37%;
+    --chart-3: 142 76% 36%;
+    --chart-4: 158 64% 52%;
+    --chart-5: 84 81% 44%;
+
+    --sidebar: 210 40% 96%;
+    --sidebar-foreground: 215 25% 27%;
+    --sidebar-primary: 120 60% 97%;
+    --sidebar-primary-foreground: 215 25% 27%;
+    --sidebar-accent: 84 81% 44%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 84 81% 44%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 215 28% 17%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 28% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 28% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 84 81% 44%;
+    --primary-foreground: 215 28% 17%;
+
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 215 28% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 84 81% 44%;
+
+    --chart-1: 160 84% 39%;
+    --chart-2: 188 95% 37%;
+    --chart-3: 142 76% 36%;
+    --chart-4: 158 64% 52%;
+    --chart-5: 84 81% 44%;
+
+    --sidebar: 215 28% 17%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 215 28% 17%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 84 81% 44%;
+    --sidebar-accent-foreground: 215 28% 17%;
+    --sidebar-border: 215 28% 17%;
+    --sidebar-ring: 84 81% 44%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
