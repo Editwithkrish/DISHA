@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'STUDENT DASHBOARD| DISHA',
+  title: 'STUDENT DASHBOARD | DISHA',
 }
 
 export default function RootLayout({

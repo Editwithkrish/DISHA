@@ -439,17 +439,17 @@ export default function UniversityDashboard() {
       {/* University KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {universityKPIs.map((kpi, index) => (
-          <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-emerald-50/80 to-green-50/60 hover:border-emerald-300' :
-            kpi.status === 'good' ? 'bg-gradient-to-br from-blue-50/80 to-indigo-50/60 hover:border-blue-300' :
-              kpi.status === 'warning' ? 'bg-gradient-to-br from-amber-50/80 to-yellow-50/60 hover:border-amber-300' :
-                'bg-gradient-to-br from-red-50/80 to-rose-50/60 hover:border-red-300'
+          <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-status-excellent/10 to-status-excellent/5 hover:border-status-excellent' :
+            kpi.status === 'good' ? 'bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 hover:border-brand-primary' :
+              kpi.status === 'warning' ? 'bg-gradient-to-br from-status-warning/10 to-status-warning/5 hover:border-status-warning' :
+                'bg-gradient-to-br from-status-danger/10 to-status-danger/5 hover:border-status-danger'
             }`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
               <CardTitle className="text-sm font-semibold text-slate-800">{kpi.title}</CardTitle>
-              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-green-100' :
-                kpi.status === 'good' ? 'bg-blue-100' :
-                  kpi.status === 'warning' ? 'bg-yellow-100' :
-                    'bg-red-100'
+              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-status-excellent/20' :
+                kpi.status === 'good' ? 'bg-brand-primary/20' :
+                  kpi.status === 'warning' ? 'bg-status-warning/20' :
+                    'bg-status-danger/20'
                 }`}>
                 <span className="text-lg">{kpi.icon}</span>
               </div>
@@ -460,12 +460,12 @@ export default function UniversityDashboard() {
               <div className="mt-3">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-slate-600">{kpi.percentage}%</span>
-                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-status-good' : 'text-status-danger'
                     }`}>{kpi.trend}</span>
                 </div>
                 <Progress
                   value={kpi.percentage}
-                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-green-500' :
+                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-status-excellent' :
                     kpi.status === 'good' ? '[&>div]:bg-blue-500' :
                       kpi.status === 'warning' ? '[&>div]:bg-yellow-500' :
                         '[&>div]:bg-red-500'
@@ -513,7 +513,7 @@ export default function UniversityDashboard() {
                     <span className="text-sm font-medium text-gray-800">{course.course}</span>
                     <span className={`ml-2 px-2 py-1 text-xs rounded-full ${course.difficulty === 'High' ? 'bg-red-100 text-red-700' :
                       course.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-green-100 text-green-700'
+                        'bg-status-good/20 text-status-good'
                       }`}>
                       {course.difficulty}
                     </span>
@@ -561,7 +561,7 @@ export default function UniversityDashboard() {
                     <td className="py-3 text-sm text-gray-800">{prof.courses}</td>
                     <td className="py-3 text-sm text-gray-800">{prof.successRate}%</td>
                     <td className="py-3">
-                      <span className={`px-2 py-1 text-xs rounded-full ${prof.research === 'High' ? 'bg-green-100 text-green-700' :
+                      <span className={`px-2 py-1 text-xs rounded-full ${prof.research === 'High' ? 'bg-status-good/20 text-status-good' :
                         prof.research === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
                           'bg-gray-100 text-gray-700'
                         }`}>
@@ -615,7 +615,7 @@ export default function UniversityDashboard() {
                   <span className="text-sm text-gray-600">{stream.source}</span>
                   <div className="text-right">
                     <div className="text-sm font-medium text-gray-800">${stream.amount}M</div>
-                    <div className={`text-xs ${stream.growth > 0 ? 'text-green-600' : 'text-red-600'
+                    <div className={`text-xs ${stream.growth > 0 ? 'text-status-good' : 'text-status-danger'
                       }`}>
                       {stream.growth > 0 ? '+' : ''}{stream.growth}%
                     </div>
@@ -637,8 +637,8 @@ export default function UniversityDashboard() {
                 <div className="text-xs text-gray-500 mb-2">Target: {metric.target}</div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className={`h-2 rounded-full ${metric.progress >= 90 ? 'bg-green-500' :
-                      metric.progress >= 70 ? 'bg-yellow-500' : 'bg-red-500'
+                    className={`h-2 rounded-full ${metric.progress >= 90 ? 'bg-status-excellent' :
+                      metric.progress >= 70 ? 'bg-status-warning' : 'bg-status-danger'
                       }`}
                     style={{ width: `${metric.progress}%` }}
                   ></div>
@@ -796,7 +796,7 @@ export default function UniversityDashboard() {
                     <span className="text-sm font-medium text-gray-800">{student.student}</span>
                     <span className={`px-2 py-1 text-xs rounded-full ${student.riskScore >= 80 ? 'bg-red-100 text-red-700' :
                       student.riskScore >= 70 ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-green-100 text-green-700'
+                        'bg-status-good/20 text-status-good'
                       }`}>
                       Risk: {student.riskScore}%
                     </span>
@@ -879,7 +879,7 @@ export default function UniversityDashboard() {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${item.progress >= 90 ? 'bg-green-500' :
+                      className={`h-2 rounded-full ${item.progress >= 90 ? 'bg-status-excellent' :
                         item.progress >= 70 ? 'bg-yellow-500' : 'bg-red-500'
                         }`}
                       style={{ width: `${item.progress}%` }}
@@ -910,9 +910,9 @@ export default function UniversityDashboard() {
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-medium text-gray-800">{dept.ratio}</div>
-                    <span className={`px-2 py-1 text-xs rounded-full ${dept.status === 'good' ? 'bg-green-100 text-green-700' :
-                      dept.status === 'acceptable' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-red-100 text-red-700'
+                    <span className={`px-2 py-1 text-xs rounded-full ${dept.status === 'good' ? 'bg-status-good/20 text-status-good' :
+                      dept.status === 'acceptable' ? 'bg-status-warning/20 text-status-warning' :
+                        'bg-status-danger/20 text-status-danger'
                       }`}>
                       {dept.status.replace('_', ' ')}
                     </span>
@@ -931,7 +931,7 @@ export default function UniversityDashboard() {
                   <span className="text-sm text-gray-600">{safety.category}</span>
                   <div className="text-right">
                     <div className="text-sm font-medium text-gray-800">{safety.count}</div>
-                    <div className={`text-xs ${safety.trend.startsWith('-') ? 'text-green-600' : 'text-red-600'
+                    <div className={`text-xs ${safety.trend.startsWith('-') ? 'text-status-good' : 'text-status-danger'
                       }`}>
                       {safety.trend}
                     </div>
@@ -966,7 +966,7 @@ export default function UniversityDashboard() {
             </TableHeader>
             <TableBody>
               {facultyData.map((faculty, index) => (
-                <TableRow key={index} className={faculty.rank <= 3 ? "bg-green-50" : ""}>
+                <TableRow key={index} className={faculty.rank <= 3 ? "bg-status-good/10" : ""}>
                   <TableCell className="font-medium">
                     {faculty.name}
                     {faculty.rank <= 3 && <Badge className="ml-2" variant="secondary">Top {faculty.rank}</Badge>}
@@ -979,7 +979,7 @@ export default function UniversityDashboard() {
                     </div>
                   </TableCell>
                   <TableCell>{faculty.workload}%</TableCell>
-                  <TableCell className={faculty.dropoutRate < 5 ? "text-green-600" : "text-red-600"}>
+                  <TableCell className={faculty.dropoutRate < 5 ? "text-status-good" : "text-status-danger"}>
                     {faculty.dropoutRate}%
                   </TableCell>
                   <TableCell>
@@ -1075,7 +1075,7 @@ export default function UniversityDashboard() {
         </Card>
       </div>
 
-      <Card className="border-2 border-red-100 shadow-lg">
+      <Card className="border-2 border-status-danger/20 shadow-lg">
         <CardHeader>
           <CardTitle className="text-slate-800">High Risk Students (AI-Driven Insights)</CardTitle>
           <CardDescription>Students requiring immediate intervention</CardDescription>
@@ -1097,8 +1097,8 @@ export default function UniversityDashboard() {
                   <TableCell>{student.department}</TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-2">
-                      <span className="text-red-600 font-semibold">{student.riskPercentage}%</span>
-                      <Progress value={student.riskPercentage} className="w-16 h-2 [&>div]:bg-red-500" />
+                      <span className="text-status-danger font-semibold">{student.riskPercentage}%</span>
+                      <Progress value={student.riskPercentage} className="w-16 h-2 [&>div]:bg-status-danger" />
                     </div>
                   </TableCell>
                   <TableCell>
@@ -1132,11 +1132,11 @@ export default function UniversityDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-gradient-to-br from-emerald-50/80 to-green-50/60 hover:border-emerald-300">
+        <Card className="border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-gradient-to-br from-emerald-50/80 to-blue-50/60 hover:border-emerald-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
             <CardTitle className="text-sm font-semibold text-slate-800">Resolved Cases</CardTitle>
-            <div className="p-2 rounded-full bg-green-100">
-              <UserCheck className="h-4 w-4 text-green-600" />
+            <div className="p-2 rounded-full bg-status-good/20">
+              <UserCheck className="h-4 w-4 text-status-good" />
             </div>
           </CardHeader>
           <CardContent>
@@ -1145,11 +1145,11 @@ export default function UniversityDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-gradient-to-br from-amber-50/80 to-yellow-50/60 hover:border-amber-300">
+        <Card className="border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-gradient-to-br from-status-warning/10 to-status-warning/5 hover:border-status-warning">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
             <CardTitle className="text-sm font-semibold text-slate-800">Pending Cases</CardTitle>
-            <div className="p-2 rounded-full bg-yellow-100">
-              <AlertTriangle className="h-4 w-4 text-yellow-600" />
+            <div className="p-2 rounded-full bg-status-warning/20">
+              <AlertTriangle className="h-4 w-4 text-status-warning" />
             </div>
           </CardHeader>
           <CardContent>

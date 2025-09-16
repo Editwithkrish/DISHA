@@ -4,64 +4,146 @@
 
 @layer base {
   :root {
-    /* Updated color tokens for Rajasthan Education Ministry government portal design */
-    --background: 0 0% 100%;
-    --foreground: 215 25% 27%;
+    /* =================================================================
+     * DISHA - Centralized Color System
+     * Education Ministry of Rajasthan - Government Portal Design
+     * =================================================================
+     * 
+     * Brand Colors - Primary blue-600 based color scheme
+     * All colors follow a consistent blue theme for visual unity
+     * CSS variables provide fallback support for older browsers
+     */
 
-    --card: 120 60% 97%;
+    /* Core Brand Colors */
+    --brand-primary: 214 100% 47%;        /* Blue-600 - Primary brand color */
+    --brand-primary-light: 219 100% 56%;  /* Blue-500 - Lighter variant */
+    --brand-primary-dark: 213 94% 68%;    /* Blue-700 - Darker variant */
+    --brand-secondary: 217 91% 60%;       /* Blue-400 - Secondary actions */
+    
+    /* Background Colors */
+    --background: 0 0% 100%;              /* Pure white background */
+    --background-muted: 210 40% 98%;      /* Light blue-gray background */
+    --background-accent: 214 100% 97%;    /* Very light blue accent */
+    
+    /* Text Colors */
+    --foreground: 215 25% 27%;            /* Dark blue-gray text */
+    --foreground-muted: 215 20% 65%;      /* Muted text color */
+    --foreground-accent: 214 100% 47%;    /* Brand color for accents */
+
+    /* Component Colors - Shadcn/UI Compatible */
+    --card: 210 40% 98%;
     --card-foreground: 215 25% 27%;
 
     --popover: 210 40% 96%;
     --popover-foreground: 215 25% 27%;
 
-    --primary: 84 81% 44%;
+    --primary: 214 100% 47%;              /* Blue-600 primary */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 120 60% 97%;
+    --secondary: 210 40% 96%;
     --secondary-foreground: 215 25% 27%;
 
     --muted: 210 40% 96%;
-    --muted-foreground: 215 25% 27%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 84 81% 44%;
+    --accent: 214 100% 47%;               /* Blue-600 accent */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    /* Status Colors - Blue-based variants */
+    --success: 214 100% 47%;              /* Blue-600 for success */
+    --success-foreground: 0 0% 100%;
+    --warning: 217 91% 60%;               /* Blue-400 for warnings */
+    --warning-foreground: 215 25% 27%;
+    --destructive: 0 84% 60%;             /* Red for destructive actions */
     --destructive-foreground: 0 0% 100%;
+    --info: 219 100% 56%;                 /* Blue-500 for info */
+    --info-foreground: 0 0% 100%;
 
+    /* Interactive Elements */
     --border: 220 13% 91%;
     --input: 0 0% 100%;
-    --ring: 84 81% 44%;
+    --ring: 214 100% 47%;                 /* Blue-600 focus ring */
 
-    --chart-1: 160 84% 39%;
-    --chart-2: 188 95% 37%;
-    --chart-3: 142 76% 36%;
-    --chart-4: 158 64% 52%;
-    --chart-5: 84 81% 44%;
+    /* Chart Colors - Blue-based palette */
+    --chart-1: 214 100% 47%;              /* Blue-600 */
+    --chart-2: 219 100% 56%;              /* Blue-500 */
+    --chart-3: 217 91% 60%;               /* Blue-400 */
+    --chart-4: 213 94% 68%;               /* Blue-300 */
+    --chart-5: 214 100% 85%;              /* Blue-200 */
 
+    /* Sidebar Colors */
     --sidebar: 210 40% 96%;
     --sidebar-foreground: 215 25% 27%;
-    --sidebar-primary: 120 60% 97%;
-    --sidebar-primary-foreground: 215 25% 27%;
-    --sidebar-accent: 84 81% 44%;
+    --sidebar-primary: 214 100% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 100% 47%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 84 81% 44%;
+    --sidebar-ring: 214 100% 47%;
 
+    /* Layout */
     --radius: 0.5rem;
+
+    /* =================================================================
+     * Custom Application Colors
+     * Standardized colors for consistent theming across components
+     * =================================================================
+     */
+
+    /* Status Indicators */
+    --status-excellent: 214 100% 47%;     /* Blue-600 for excellent status */
+    --status-good: 219 100% 56%;          /* Blue-500 for good status */
+    --status-warning: 217 91% 60%;        /* Blue-400 for warnings */
+    --status-danger: 0 84% 60%;           /* Red for danger/critical */
+
+    /* Priority Levels */
+    --priority-high: 0 84% 60%;           /* Red for high priority */
+    --priority-medium: 217 91% 60%;       /* Blue-400 for medium priority */
+    --priority-low: 214 100% 47%;         /* Blue-600 for low priority */
+
+    /* Performance Indicators */
+    --performance-excellent: 214 100% 47%; /* Blue-600 */
+    --performance-good: 219 100% 56%;      /* Blue-500 */
+    --performance-average: 217 91% 60%;    /* Blue-400 */
+    --performance-poor: 0 84% 60%;         /* Red */
+
+    /* Engagement Levels */
+    --engagement-high: 214 100% 47%;      /* Blue-600 */
+    --engagement-medium: 219 100% 56%;    /* Blue-500 */
+    --engagement-low: 217 91% 60%;        /* Blue-400 */
   }
 
   .dark {
-    --background: 215 28% 17%;
-    --foreground: 210 40% 98%;
+    /* =================================================================
+     * Dark Mode - Blue Theme Variants
+     * Maintains brand consistency in dark mode
+     * =================================================================
+     */
 
+    /* Core Brand Colors - Dark Mode */
+    --brand-primary: 219 100% 56%;        /* Blue-500 - Lighter for dark backgrounds */
+    --brand-primary-light: 217 91% 60%;   /* Blue-400 - Even lighter variant */
+    --brand-primary-dark: 214 100% 47%;   /* Blue-600 - Darker variant */
+    --brand-secondary: 213 94% 68%;       /* Blue-300 - Secondary actions */
+    
+    /* Background Colors - Dark Mode */
+    --background: 215 28% 17%;            /* Dark blue-gray background */
+    --background-muted: 215 25% 20%;      /* Slightly lighter dark background */
+    --background-accent: 215 30% 15%;     /* Darker accent background */
+    
+    /* Text Colors - Dark Mode */
+    --foreground: 210 40% 98%;            /* Light text */
+    --foreground-muted: 215 20% 65%;      /* Muted light text */
+    --foreground-accent: 219 100% 56%;    /* Blue-500 for accents */
+
+    /* Component Colors - Dark Mode */
     --card: 215 28% 17%;
     --card-foreground: 210 40% 98%;
 
     --popover: 215 28% 17%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 84 81% 44%;
+    --primary: 219 100% 56%;              /* Blue-500 primary for dark mode */
     --primary-foreground: 215 28% 17%;
 
     --secondary: 215 28% 17%;
@@ -70,30 +152,62 @@
     --muted: 215 28% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 215 28% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 219 100% 56%;               /* Blue-500 accent for dark mode */
+    --accent-foreground: 215 28% 17%;
 
-    --destructive: 0 63% 31%;
+    /* Status Colors - Dark Mode */
+    --success: 219 100% 56%;              /* Blue-500 for success */
+    --success-foreground: 215 28% 17%;
+    --warning: 217 91% 60%;               /* Blue-400 for warnings */
+    --warning-foreground: 215 28% 17%;
+    --destructive: 0 63% 31%;             /* Darker red for destructive actions */
     --destructive-foreground: 210 40% 98%;
+    --info: 217 91% 60%;                  /* Blue-400 for info */
+    --info-foreground: 215 28% 17%;
 
+    /* Interactive Elements - Dark Mode */
     --border: 215 28% 17%;
     --input: 215 28% 17%;
-    --ring: 84 81% 44%;
+    --ring: 219 100% 56%;                 /* Blue-500 focus ring */
 
-    --chart-1: 160 84% 39%;
-    --chart-2: 188 95% 37%;
-    --chart-3: 142 76% 36%;
-    --chart-4: 158 64% 52%;
-    --chart-5: 84 81% 44%;
+    /* Chart Colors - Dark Mode Blue Palette */
+    --chart-1: 219 100% 56%;              /* Blue-500 */
+    --chart-2: 217 91% 60%;               /* Blue-400 */
+    --chart-3: 213 94% 68%;               /* Blue-300 */
+    --chart-4: 214 100% 85%;              /* Blue-200 */
+    --chart-5: 214 100% 90%;              /* Blue-100 */
 
+    /* Sidebar Colors - Dark Mode */
     --sidebar: 215 28% 17%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 215 28% 17%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 84 81% 44%;
+    --sidebar-primary: 219 100% 56%;
+    --sidebar-primary-foreground: 215 28% 17%;
+    --sidebar-accent: 219 100% 56%;
     --sidebar-accent-foreground: 215 28% 17%;
     --sidebar-border: 215 28% 17%;
-    --sidebar-ring: 84 81% 44%;
+    --sidebar-ring: 219 100% 56%;
+
+    /* Status Indicators - Dark Mode */
+    --status-excellent: 219 100% 56%;     /* Blue-500 for excellent status */
+    --status-good: 217 91% 60%;           /* Blue-400 for good status */
+    --status-warning: 213 94% 68%;        /* Blue-300 for warnings */
+    --status-danger: 0 63% 31%;           /* Darker red for danger/critical */
+
+    /* Priority Levels - Dark Mode */
+    --priority-high: 0 63% 31%;           /* Darker red for high priority */
+    --priority-medium: 217 91% 60%;       /* Blue-400 for medium priority */
+    --priority-low: 219 100% 56%;         /* Blue-500 for low priority */
+
+    /* Performance Indicators - Dark Mode */
+    --performance-excellent: 219 100% 56%; /* Blue-500 */
+    --performance-good: 217 91% 60%;       /* Blue-400 */
+    --performance-average: 213 94% 68%;    /* Blue-300 */
+    --performance-poor: 0 63% 31%;         /* Darker red */
+
+    /* Engagement Levels - Dark Mode */
+    --engagement-high: 219 100% 56%;      /* Blue-500 */
+    --engagement-medium: 217 91% 60%;     /* Blue-400 */
+    --engagement-low: 213 94% 68%;        /* Blue-300 */
   }
 }
 
@@ -103,5 +217,95 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* =================================================================
+ * Utility Classes for Standardized Colors
+ * Use these classes instead of hardcoded Tailwind colors
+ * =================================================================
+ */
+
+@layer utilities {
+  /* Brand Color Utilities */
+  .bg-brand-primary { background-color: hsl(var(--brand-primary)); }
+  .bg-brand-primary-light { background-color: hsl(var(--brand-primary-light)); }
+  .bg-brand-primary-dark { background-color: hsl(var(--brand-primary-dark)); }
+  .bg-brand-secondary { background-color: hsl(var(--brand-secondary)); }
+  
+  .text-brand-primary { color: hsl(var(--brand-primary)); }
+  .text-brand-primary-light { color: hsl(var(--brand-primary-light)); }
+  .text-brand-primary-dark { color: hsl(var(--brand-primary-dark)); }
+  .text-brand-secondary { color: hsl(var(--brand-secondary)); }
+  
+  .border-brand-primary { border-color: hsl(var(--brand-primary)); }
+  .border-brand-primary-light { border-color: hsl(var(--brand-primary-light)); }
+  .border-brand-primary-dark { border-color: hsl(var(--brand-primary-dark)); }
+  .border-brand-secondary { border-color: hsl(var(--brand-secondary)); }
+
+  /* Status Color Utilities */
+  .bg-status-excellent { background-color: hsl(var(--status-excellent)); }
+  .bg-status-good { background-color: hsl(var(--status-good)); }
+  .bg-status-warning { background-color: hsl(var(--status-warning)); }
+  .bg-status-danger { background-color: hsl(var(--status-danger)); }
+  
+  .text-status-excellent { color: hsl(var(--status-excellent)); }
+  .text-status-good { color: hsl(var(--status-good)); }
+  .text-status-warning { color: hsl(var(--status-warning)); }
+  .text-status-danger { color: hsl(var(--status-danger)); }
+  
+  .border-status-excellent { border-color: hsl(var(--status-excellent)); }
+  .border-status-good { border-color: hsl(var(--status-good)); }
+  .border-status-warning { border-color: hsl(var(--status-warning)); }
+  .border-status-danger { border-color: hsl(var(--status-danger)); }
+
+  /* Priority Color Utilities */
+  .bg-priority-high { background-color: hsl(var(--priority-high)); }
+  .bg-priority-medium { background-color: hsl(var(--priority-medium)); }
+  .bg-priority-low { background-color: hsl(var(--priority-low)); }
+  
+  .text-priority-high { color: hsl(var(--priority-high)); }
+  .text-priority-medium { color: hsl(var(--priority-medium)); }
+  .text-priority-low { color: hsl(var(--priority-low)); }
+  
+  .border-priority-high { border-color: hsl(var(--priority-high)); }
+  .border-priority-medium { border-color: hsl(var(--priority-medium)); }
+  .border-priority-low { border-color: hsl(var(--priority-low)); }
+
+  /* Performance Color Utilities */
+  .bg-performance-excellent { background-color: hsl(var(--performance-excellent)); }
+  .bg-performance-good { background-color: hsl(var(--performance-good)); }
+  .bg-performance-average { background-color: hsl(var(--performance-average)); }
+  .bg-performance-poor { background-color: hsl(var(--performance-poor)); }
+  
+  .text-performance-excellent { color: hsl(var(--performance-excellent)); }
+  .text-performance-good { color: hsl(var(--performance-good)); }
+  .text-performance-average { color: hsl(var(--performance-average)); }
+  .text-performance-poor { color: hsl(var(--performance-poor)); }
+
+  /* Engagement Color Utilities */
+  .bg-engagement-high { background-color: hsl(var(--engagement-high)); }
+  .bg-engagement-medium { background-color: hsl(var(--engagement-medium)); }
+  .bg-engagement-low { background-color: hsl(var(--engagement-low)); }
+  
+  .text-engagement-high { color: hsl(var(--engagement-high)); }
+  .text-engagement-medium { color: hsl(var(--engagement-medium)); }
+  .text-engagement-low { color: hsl(var(--engagement-low)); }
+
+  /* Background Utilities */
+  .bg-background-muted { background-color: hsl(var(--background-muted)); }
+  .bg-background-accent { background-color: hsl(var(--background-accent)); }
+  
+  /* Text Utilities */
+  .text-foreground-muted { color: hsl(var(--foreground-muted)); }
+  .text-foreground-accent { color: hsl(var(--foreground-accent)); }
+
+  /* Gradient Utilities for Brand Colors */
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(var(--brand-primary-light)));
+  }
+  
+  .bg-gradient-brand-subtle {
+    background: linear-gradient(135deg, hsl(var(--background-accent)), hsl(var(--background-muted)));
   }
 }

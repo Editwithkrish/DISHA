@@ -301,17 +301,17 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
       {/* Student KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {studentKPIs.map((kpi, index) => (
-          <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-emerald-50/80 to-green-50/60 hover:border-emerald-300' :
-              kpi.status === 'good' ? 'bg-gradient-to-br from-blue-50/80 to-indigo-50/60 hover:border-blue-300' :
-                kpi.status === 'on-track' ? 'bg-gradient-to-br from-amber-50/80 to-yellow-50/60 hover:border-amber-300' :
-                  'bg-gradient-to-br from-red-50/80 to-rose-50/60 hover:border-red-300'
+          <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-status-excellent/10 to-status-excellent/5 hover:border-status-excellent' :
+              kpi.status === 'good' ? 'bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 hover:border-brand-primary' :
+                kpi.status === 'on-track' ? 'bg-gradient-to-br from-status-warning/10 to-status-warning/5 hover:border-status-warning' :
+                  'bg-gradient-to-br from-status-danger/10 to-status-danger/5 hover:border-status-danger'
             }`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
               <CardTitle className="text-sm font-semibold text-slate-800">{kpi.title}</CardTitle>
-              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-green-100' :
-                  kpi.status === 'good' ? 'bg-blue-100' :
-                    kpi.status === 'on-track' ? 'bg-yellow-100' :
-                      'bg-red-100'
+              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-status-excellent/20' :
+                  kpi.status === 'good' ? 'bg-brand-primary/20' :
+                    kpi.status === 'on-track' ? 'bg-status-warning/20' :
+                      'bg-status-danger/20'
                 }`}>
                 <span className="text-lg">{kpi.icon}</span>
               </div>
@@ -322,15 +322,15 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
               <div className="mt-3">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-slate-600">{kpi.percentage}%</span>
-                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-status-excellent' : 'text-status-danger'
                     }`}>{kpi.trend}</span>
                 </div>
                 <Progress
                   value={kpi.percentage}
-                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-green-500' :
-                      kpi.status === 'good' ? '[&>div]:bg-blue-500' :
-                        kpi.status === 'on-track' ? '[&>div]:bg-yellow-500' :
-                          '[&>div]:bg-red-500'
+                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-status-excellent' :
+                      kpi.status === 'good' ? '[&>div]:bg-brand-primary' :
+                        kpi.status === 'on-track' ? '[&>div]:bg-status-warning' :
+                          '[&>div]:bg-status-danger'
                     }`}
                 />
               </div>
@@ -462,25 +462,25 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
       </div>
 
       {/* Performance Comparison */}
-      <Card className="border-2 border-green-100 shadow-lg">
+      <Card className="border-2 border-status-good/20 shadow-lg">
         <CardHeader>
           <CardTitle className="text-slate-800">Performance Comparison</CardTitle>
           <CardDescription>How you compare with class averages</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <div className="text-3xl font-bold text-green-600">+0.6</div>
+            <div className="text-center p-4 bg-status-excellent/10 rounded-lg">
+              <div className="text-3xl font-bold text-status-excellent">+0.6</div>
               <div className="text-sm text-slate-600">Above Class Average</div>
               <div className="text-xs text-slate-500 mt-1">GPA Difference</div>
             </div>
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-3xl font-bold text-blue-600">Top 15%</div>
+            <div className="text-center p-4 bg-brand-primary/10 rounded-lg">
+              <div className="text-3xl font-bold text-brand-primary">Top 15%</div>
               <div className="text-sm text-slate-600">Class Ranking</div>
               <div className="text-xs text-slate-500 mt-1">Academic Performance</div>
             </div>
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-3xl font-bold text-purple-600">92.5%</div>
+            <div className="text-center p-4 bg-brand-secondary/10 rounded-lg">
+              <div className="text-3xl font-bold text-brand-secondary">92.5%</div>
               <div className="text-sm text-slate-600">Attendance Rate</div>
               <div className="text-xs text-slate-500 mt-1">vs 87% Class Avg</div>
             </div>
@@ -513,7 +513,7 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
                         {new Date(session.date).toLocaleDateString()} at {session.time}
                       </p>
                     </div>
-                    <Badge className="bg-green-100 text-green-800">Scheduled</Badge>
+                    <Badge className="bg-status-good/20 text-status-good">Scheduled</Badge>
                   </div>
                 </div>
               ))}
@@ -617,14 +617,14 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
           <div className="space-y-4">
             {notifications.map((notification, index) => (
               <div key={index} className={`p-4 rounded-lg border-l-4 ${notification.type === 'alert' ? 'bg-red-50 border-red-400' :
-                  notification.type === 'positive' ? 'bg-green-50 border-green-400' :
+                  notification.type === 'positive' ? 'bg-status-good/10 border-status-good' :
                     'bg-blue-50 border-blue-400'
                 }`}>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
                     {
                       notification.type === 'alert' ? <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5" /> :
-                        notification.type === 'positive' ? <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" /> :
+                        notification.type === 'positive' ? <CheckCircle className="h-5 w-5 text-status-good mt-0.5" /> :
                           <Info className="h-5 w-5 text-blue-600 mt-0.5" />
                     }
                     <div>
@@ -762,23 +762,23 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
 
       {/* Financial Aid Status */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="border-2 border-green-100 shadow-lg">
+        <Card className="border-2 border-status-good/20 shadow-lg">
           <CardHeader>
             <CardTitle className="text-slate-800 flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-green-600" />
+              <DollarSign className="h-5 w-5 text-status-good" />
               Scholarship & Financial Aid
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+              <div className="p-4 bg-status-good/10 rounded-lg border border-status-good/20">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-semibold text-slate-800">Merit Scholarship</h4>
-                  <Badge className="bg-green-100 text-green-800">Eligible</Badge>
+                  <Badge className="bg-status-good/20 text-status-good">Eligible</Badge>
                 </div>
                 <p className="text-sm text-slate-600">₹50,000 per semester</p>
                 <p className="text-xs text-slate-500 mt-1">Application deadline: March 15, 2024</p>
-                <Button size="sm" className="mt-3 bg-green-600 hover:bg-green-700 text-white">
+                <Button size="sm" className="mt-3 bg-status-good hover:bg-status-good/90 text-white">
                   Apply Now
                 </Button>
               </div>

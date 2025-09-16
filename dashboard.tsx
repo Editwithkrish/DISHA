@@ -740,11 +740,11 @@ export default function Dashboard() {
             }`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
               <CardTitle className="text-sm font-semibold text-slate-800">{kpi.title}</CardTitle>
-              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-blue-100' :
-                kpi.status === 'good' ? 'bg-blue-100' :
-                  kpi.status === 'on-track' ? 'bg-yellow-100' :
-                    'bg-red-100'
-                }`}>
+              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-status-excellent/20' :
+                  kpi.status === 'good' ? 'bg-brand-primary/20' :
+                    kpi.status === 'on-track' ? 'bg-status-warning/20' :
+                      'bg-status-danger/20'
+                  }`}>
                 <span className="text-lg">{kpi.icon}</span>
               </div>
             </CardHeader>
@@ -754,16 +754,16 @@ export default function Dashboard() {
               <div className="mt-3">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-slate-600">{kpi.percentage}%</span>
-                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-blue-600' : 'text-red-600'
-                    }`}>{kpi.trend}</span>
+                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-status-excellent' : 'text-status-danger'
+                      }`}>{kpi.trend}</span>
                 </div>
                 <Progress
                   value={kpi.percentage}
-                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-blue-500' :
-                    kpi.status === 'good' ? '[&>div]:bg-blue-500' :
-                      kpi.status === 'on-track' ? '[&>div]:bg-yellow-500' :
-                        '[&>div]:bg-red-500'
-                    }`}
+                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-status-excellent' :
+                      kpi.status === 'good' ? '[&>div]:bg-brand-primary' :
+                        kpi.status === 'on-track' ? '[&>div]:bg-status-warning' :
+                          '[&>div]:bg-status-danger'
+                      }`}
                 />
               </div>
             </CardContent>
@@ -1180,7 +1180,7 @@ export default function Dashboard() {
               <Filter className="h-5 w-5" />
               Comprehensive Analytics Filters
             </CardTitle>
-            <CardDescription className="text-blue-100">
+            <CardDescription className="text-foreground/80">
               Drill down from state to district to institution level data
             </CardDescription>
           </CardHeader>
@@ -1195,7 +1195,7 @@ export default function Dashboard() {
                     variant={selectedLevel === level ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setSelectedLevel(level)}
-                    className={selectedLevel === level ? 'bg-blue-600 hover:bg-blue-700' : 'hover:bg-blue-50'}
+                    className={selectedLevel === level ? 'bg-brand-primary hover:bg-brand-primary/90' : 'hover:bg-background-muted'}
                   >
                     {level.charAt(0).toUpperCase() + level.slice(1)} Level
                   </Button>
@@ -1248,7 +1248,7 @@ export default function Dashboard() {
                 </Select>
               </div>
               <div className="flex items-end">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700" variant="default">
+                <Button className="w-full bg-brand-primary hover:bg-brand-primary/90" variant="default">
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Apply Filters
                 </Button>
@@ -1375,8 +1375,8 @@ export default function Dashboard() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="bg-blue-100 p-2 rounded-lg">
-                  <Filter className="h-5 w-5 text-blue-600" />
+                <div className="bg-brand-primary/10 p-2 rounded-lg">
+                  <Filter className="h-5 w-5 text-brand-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-800">Current View</h3>
@@ -1619,7 +1619,7 @@ export default function Dashboard() {
                 </Select>
               </div>
               <div className="flex items-end">
-                <Button onClick={exportToCSV} className="w-full bg-blue-500 hover:bg-blue-600">
+                <Button onClick={exportToCSV} className="w-full bg-brand-primary hover:bg-brand-primary/90">
                   <Download className="w-4 h-4 mr-2" />
                   Export CSV
                 </Button>
@@ -1753,7 +1753,7 @@ export default function Dashboard() {
           <Card className="bg-white border-blue-100 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-slate-700">Total Teachers</CardTitle>
-              <Users className="h-4 w-4 text-blue-500" />
+              <Users className="h-4 w-4 text-brand-primary" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-slate-900">{teachersData.length}</div>
@@ -1764,11 +1764,11 @@ export default function Dashboard() {
           <Card className="bg-white border-blue-100 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-slate-700">Avg Engagement</CardTitle>
-              <TrendingUp className="h-4 w-4 text-blue-500" />
+              <TrendingUp className="h-4 w-4 text-brand-primary" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-slate-900">{avgEngagement.toFixed(1)}%</div>
-              <p className="text-xs text-blue-600">+2.3% from last month</p>
+              <p className="text-xs text-brand-primary">+2.3% from last month</p>
             </CardContent>
           </Card>
 
@@ -1786,7 +1786,7 @@ export default function Dashboard() {
           <Card className="bg-white border-blue-100 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-slate-700">High Performers</CardTitle>
-              <TrendingUp className="h-4 w-4 text-yellow-500" />
+              <TrendingUp className="h-4 w-4 text-status-warning" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-slate-900">{highEngagementTeachers.length}</div>
@@ -2132,10 +2132,10 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-blue-600 text-sm font-medium">Active Cases</p>
-                  <p className="text-2xl font-bold text-blue-800">{counsellingData.caseStats.totalActive}</p>
-                </div>
-                <HeartHandshake className="h-8 w-8 text-blue-600" />
+                  <p className="text-brand-primary text-sm font-medium">Active Cases</p>
+                <p className="text-2xl font-bold text-brand-primary">{counsellingData.caseStats.totalActive}</p>
+              </div>
+              <HeartHandshake className="h-8 w-8 text-brand-primary" />
               </div>
             </CardContent>
           </Card>
@@ -2144,10 +2144,10 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-red-600 text-sm font-medium">High Risk Cases</p>
-                  <p className="text-2xl font-bold text-red-800">{counsellingData.caseStats.highRisk}</p>
-                </div>
-                <AlertTriangle className="h-8 w-8 text-red-600" />
+                  <p className="text-status-danger text-sm font-medium">High Risk Cases</p>
+                <p className="text-2xl font-bold text-status-danger">{counsellingData.caseStats.highRisk}</p>
+              </div>
+              <AlertTriangle className="h-8 w-8 text-status-danger" />
               </div>
             </CardContent>
           </Card>
@@ -2156,10 +2156,10 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-blue-600 text-sm font-medium">Success Rate</p>
-                  <p className="text-2xl font-bold text-blue-800">{counsellingData.caseStats.successRate}%</p>
-                </div>
-                <TrendingUp className="h-8 w-8 text-blue-600" />
+                  <p className="text-brand-primary text-sm font-medium">Success Rate</p>
+                <p className="text-2xl font-bold text-brand-primary">{counsellingData.caseStats.successRate}%</p>
+              </div>
+              <TrendingUp className="h-8 w-8 text-brand-primary" />
               </div>
             </CardContent>
           </Card>
@@ -2553,7 +2553,7 @@ export default function Dashboard() {
             <p className="text-slate-600 mt-1">Generate comprehensive ministry-level reports and analytics</p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={() => handleGenerateReport('custom')} className="bg-blue-600 hover:bg-blue-700">
+            <Button onClick={() => handleGenerateReport('custom')} className="bg-brand-primary hover:bg-brand-primary/90">
               <FileText className="w-4 h-4 mr-2" />
               Quick Generate
             </Button>
@@ -2601,7 +2601,7 @@ export default function Dashboard() {
         <Card className="bg-white shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-              <Settings className="h-5 w-5 text-blue-500" />
+              <Settings className="h-5 w-5 text-brand-primary" />
               Report Configuration & Filters
             </CardTitle>
             <CardDescription>Configure report parameters and apply advanced filters</CardDescription>
@@ -2838,7 +2838,7 @@ export default function Dashboard() {
                   <CardTitle className="text-lg font-semibold text-slate-800">Scheduled Reports</CardTitle>
                   <CardDescription>Automated report generation schedules</CardDescription>
                 </div>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button className="bg-brand-primary hover:bg-brand-primary/90">
                   <Plus className="w-4 h-4 mr-2" />
                   New Schedule
                 </Button>
@@ -2961,7 +2961,7 @@ export default function Dashboard() {
         <Card className="bg-white shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-              <Settings className="h-5 w-5 text-blue-500" />
+              <Settings className="h-5 w-5 text-brand-primary" />
               Settings
             </CardTitle>
             <CardDescription>Manage your account, preferences, and security settings</CardDescription>
@@ -3243,8 +3243,8 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center space-x-4 p-4 border rounded-lg">
-                      <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                        <UserCheck className="h-6 w-6 text-blue-600" />
+                      <div className="h-12 w-12 rounded-full bg-brand-primary/10 flex items-center justify-center">
+                  <UserCheck className="h-6 w-6 text-brand-primary" />
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold">{profile.role}</h4>
@@ -3550,7 +3550,7 @@ export default function Dashboard() {
                             <p className="text-sm text-muted-foreground">Sync with national education database</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Badge variant="outline" className="text-blue-600">Connected</Badge>
+                            <Badge variant="outline" className="text-brand-primary">Connected</Badge>
                             <Switch defaultChecked />
                           </div>
                         </div>
@@ -3560,7 +3560,7 @@ export default function Dashboard() {
                             <p className="text-sm text-muted-foreground">Integration with budget management system</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Badge variant="outline" className="text-blue-600">Connected</Badge>
+                            <Badge variant="outline" className="text-brand-primary">Connected</Badge>
                             <Switch defaultChecked />
                           </div>
                         </div>
@@ -3570,7 +3570,7 @@ export default function Dashboard() {
                             <p className="text-sm text-muted-foreground">Unified District Information System for Education</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Badge variant="outline" className="text-yellow-600">Pending</Badge>
+                            <Badge variant="outline" className="text-status-warning">Pending</Badge>
                             <Switch />
                           </div>
                         </div>
