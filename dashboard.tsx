@@ -733,14 +733,14 @@ export default function Dashboard() {
       {/* Ministry KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {ministryKPIs.map((kpi, index) => (
-          <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-emerald-50/80 to-green-50/60 hover:border-emerald-300' :
+          <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-emerald-50/80 to-blue-50/60 hover:border-emerald-300' :
             kpi.status === 'good' ? 'bg-gradient-to-br from-blue-50/80 to-indigo-50/60 hover:border-blue-300' :
               kpi.status === 'on-track' ? 'bg-gradient-to-br from-amber-50/80 to-yellow-50/60 hover:border-amber-300' :
                 'bg-gradient-to-br from-red-50/80 to-rose-50/60 hover:border-red-300'
             }`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
               <CardTitle className="text-sm font-semibold text-slate-800">{kpi.title}</CardTitle>
-              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-green-100' :
+              <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-blue-100' :
                 kpi.status === 'good' ? 'bg-blue-100' :
                   kpi.status === 'on-track' ? 'bg-yellow-100' :
                     'bg-red-100'
@@ -754,12 +754,12 @@ export default function Dashboard() {
               <div className="mt-3">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-slate-600">{kpi.percentage}%</span>
-                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                  <span className={`text-xs font-medium ${kpi.trend.startsWith('+') ? 'text-blue-600' : 'text-red-600'
                     }`}>{kpi.trend}</span>
                 </div>
                 <Progress
                   value={kpi.percentage}
-                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-green-500' :
+                  className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-blue-500' :
                     kpi.status === 'good' ? '[&>div]:bg-blue-500' :
                       kpi.status === 'on-track' ? '[&>div]:bg-yellow-500' :
                         '[&>div]:bg-red-500'
@@ -1010,7 +1010,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="border-2 border-green-100 shadow-lg">
+        <Card className="border-2 border-blue-100 shadow-lg">
           <CardHeader>
             <CardTitle className="text-slate-800">District Enrollment vs Retention</CardTitle>
             <CardDescription>Scatter analysis of district performance metrics</CardDescription>
@@ -1371,12 +1371,12 @@ export default function Dashboard() {
         </Card>
 
         {/* Filter Summary */}
-        <Card className="border-2 border-green-100 shadow-lg bg-gradient-to-r from-green-50 to-blue-50">
+        <Card className="border-2 border-blue-100 shadow-lg bg-gradient-to-r from-blue-50 to-blue-50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="bg-green-100 p-2 rounded-lg">
-                  <Filter className="h-5 w-5 text-green-600" />
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <Filter className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-800">Current View</h3>
@@ -1715,7 +1715,7 @@ export default function Dashboard() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} ${( percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                   outerRadius={100}
                   fill="#8884d8"
                   dataKey="value"
@@ -1764,11 +1764,11 @@ export default function Dashboard() {
           <Card className="bg-white border-blue-100 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-slate-700">Avg Engagement</CardTitle>
-              <TrendingUp className="h-4 w-4 text-green-500" />
+              <TrendingUp className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-slate-900">{avgEngagement.toFixed(1)}%</div>
-              <p className="text-xs text-green-600">+2.3% from last month</p>
+              <p className="text-xs text-blue-600">+2.3% from last month</p>
             </CardContent>
           </Card>
 
@@ -2152,14 +2152,14 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-green-600 text-sm font-medium">Success Rate</p>
-                  <p className="text-2xl font-bold text-green-800">{counsellingData.caseStats.successRate}%</p>
+                  <p className="text-blue-600 text-sm font-medium">Success Rate</p>
+                  <p className="text-2xl font-bold text-blue-800">{counsellingData.caseStats.successRate}%</p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-green-600" />
+                <TrendingUp className="h-8 w-8 text-blue-600" />
               </div>
             </CardContent>
           </Card>
@@ -3550,7 +3550,7 @@ export default function Dashboard() {
                             <p className="text-sm text-muted-foreground">Sync with national education database</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Badge variant="outline" className="text-green-600">Connected</Badge>
+                            <Badge variant="outline" className="text-blue-600">Connected</Badge>
                             <Switch defaultChecked />
                           </div>
                         </div>
@@ -3560,7 +3560,7 @@ export default function Dashboard() {
                             <p className="text-sm text-muted-foreground">Integration with budget management system</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Badge variant="outline" className="text-green-600">Connected</Badge>
+                            <Badge variant="outline" className="text-blue-600">Connected</Badge>
                             <Switch defaultChecked />
                           </div>
                         </div>
@@ -3635,14 +3635,14 @@ export default function Dashboard() {
                     <div key={index} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                       <div className="flex items-center gap-3">
                         <div className={`w-2 h-2 rounded-full ${factor.trend === 'increasing' ? 'bg-red-500' :
-                          factor.trend === 'decreasing' ? 'bg-green-500' : 'bg-yellow-500'
+                          factor.trend === 'decreasing' ? 'bg-blue-500' : 'bg-yellow-500'
                           }`} />
                         <span className="text-sm font-medium text-slate-700">{factor.factor}</span>
                       </div>
                       <div className="text-right">
                         <div className="text-sm font-semibold text-slate-800">{factor.impact}%</div>
                         <div className={`text-xs ${factor.trend === 'increasing' ? 'text-red-600' :
-                          factor.trend === 'decreasing' ? 'text-green-600' : 'text-yellow-600'
+                          factor.trend === 'decreasing' ? 'text-blue-600' : 'text-yellow-600'
                           }`}>
                           {factor.trend}
                         </div>
@@ -3700,7 +3700,7 @@ export default function Dashboard() {
                   <div key={index} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3">
                       <div className={`w-3 h-3 rounded-full ${region.risk === 'High' ? 'bg-red-500' :
-                        region.risk === 'Medium' ? 'bg-yellow-500' : 'bg-green-500'
+                        region.risk === 'Medium' ? 'bg-yellow-500' : 'bg-blue-500'
                         }`} />
                       <span className="text-sm font-medium text-slate-700">{region.name}</span>
                     </div>
@@ -3781,14 +3781,14 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-green-100 shadow-sm hover:shadow-md transition-shadow">
+          <Card className="bg-white border-blue-100 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-slate-700">Average Attendance</CardTitle>
-              <Calendar className="h-4 w-4 text-green-500" />
+              <Calendar className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{avgAttendance.toFixed(1)}%</div>
-              <p className="text-xs text-green-500">Overall attendance rate</p>
+              <div className="text-2xl font-bold text-blue-600">{avgAttendance.toFixed(1)}%</div>
+              <p className="text-xs text-blue-500">Overall attendance rate</p>
             </CardContent>
           </Card>
 
@@ -3903,7 +3903,7 @@ export default function Dashboard() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <span>{student.attendance}%</span>
-                        <div className={`w-2 h-2 rounded-full ${student.attendance >= 85 ? 'bg-green-500' :
+                        <div className={`w-2 h-2 rounded-full ${student.attendance >= 85 ? 'bg-blue-500' :
                           student.attendance >= 70 ? 'bg-yellow-500' : 'bg-red-500'
                           }`} />
                       </div>
@@ -3911,7 +3911,7 @@ export default function Dashboard() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <span>{student.performance}%</span>
-                        <div className={`w-2 h-2 rounded-full ${student.performance >= 80 ? 'bg-green-500' :
+                        <div className={`w-2 h-2 rounded-full ${student.performance >= 80 ? 'bg-blue-500' :
                           student.performance >= 60 ? 'bg-yellow-500' : 'bg-red-500'
                           }`} />
                       </div>
@@ -3920,7 +3920,7 @@ export default function Dashboard() {
                       <Badge
                         variant={student.riskLevel === 'High' ? 'destructive' :
                           student.riskLevel === 'Medium' ? 'default' : 'secondary'}
-                        className={student.riskLevel === 'Low' ? 'bg-green-100 text-green-800' : ''}
+                        className={student.riskLevel === 'Low' ? 'bg-blue-100 text-blue-800' : ''}
                       >
                         {student.riskLevel}
                       </Badge>
@@ -4069,7 +4069,7 @@ export default function Dashboard() {
                   key={item.id}
                   onClick={() => setActiveSection(item.id)}
                   className={`flex items-center w-full px-4 py-3 text-sm font-medium rounded-md transition-all duration-200 ${activeSection === item.id
-                    ? "bg-white text-[#0A3A67] border-l-4 border-[#138808]" // Green accent for active
+                    ? "bg-white text-[#0A3A67] border-l-4 border-[#138808]" // blue accent for active
                     : "text-gray-200 hover:bg-[#0C477A] hover:text-white"
                     }`}
                 >
@@ -4143,7 +4143,7 @@ export default function Dashboard() {
                     <DropdownMenuItem
                       key={lang.code}
                       onClick={() => setLanguage(lang.code as Language)}
-                      className={language === lang.code ? "bg-green-50 text-green-700" : ""}
+                      className={language === lang.code ? "bg-blue-50 text-blue-700" : ""}
                     >
                       {lang.name}
                     </DropdownMenuItem>
