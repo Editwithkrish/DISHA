@@ -156,12 +156,10 @@ export default function LandingPage() {
               <div>
                 <img
                   src="https://mituniversity.ac.in/assets_web/images/LOGO3.png"
-
                   alt="MIT University Logo"
-                  className="h-16 mx-auto mb-4 "
+                  className="h-16 p-2 mx-auto mb-4 bg-purple-900 rounded-lg"
                 />
               </div>
-
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-bold text-slate-800 mb-6">
