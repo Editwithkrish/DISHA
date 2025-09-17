@@ -62,7 +62,7 @@ const getDifficultyColor = (difficulty: string) => {
   }
 }
 
-export default function DepartmentAnalytics({ selectedUniversity = "university-a" }: DepartmentAnalyticsProps) {
+export default function DepartmentAnalytics({ selectedUniversity = "mit-adt" }: DepartmentAnalyticsProps) {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

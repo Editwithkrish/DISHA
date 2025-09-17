@@ -66,7 +66,7 @@ const getSatisfactionColor = (satisfaction: number) => {
   return "text-red-600"
 }
 
-export default function FacultyEngagement({ selectedUniversity = "university-a" }: FacultyEngagementProps) {
+export default function FacultyEngagement({ selectedUniversity = "mit-adt" }: FacultyEngagementProps) {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

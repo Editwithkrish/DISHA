@@ -46,7 +46,7 @@ const fallbackYearlyTrend = [
   { year: "2023", rate: 8.2 }
 ]
 
-export default function UniversityOverview({ selectedUniversity = "university-a" }: UniversityOverviewProps) {
+export default function UniversityOverview({ selectedUniversity = "mit-adt" }: UniversityOverviewProps) {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
