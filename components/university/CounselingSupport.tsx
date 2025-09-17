@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
-import { Heart, Users, Calendar, TrendingUp, Clock, CheckCircle, AlertCircle, Phone } from 'lucide-react';
+import { Headset, Users, Calendar, TrendingUp, Clock, CheckCircle, AlertCircle, Phone } from 'lucide-react';
 
 // Counseling data
 const counselingStats = [
@@ -297,7 +297,7 @@ export default function CounselingSupport() {
               <span>Group Sessions</span>
             </Button>
             <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
-              <Heart className="h-6 w-6" />
+              <Headset className="h-6 w-6" />
               <span>Wellness Check</span>
             </Button>
           </div>
