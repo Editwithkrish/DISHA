@@ -97,18 +97,9 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
   const [showChatbot, setShowChatbot] = useState(false)
   const { toast } = useToast()
 
-  // Student Personal KPIs
+  // Student sonal KPIs
   const studentKPIs = [
-    {
-      title: "Risk Score",
-      value: "Low",
-      percentage: 85,
-      target: "Keep Above 80%",
-      status: "excellent",
-      icon: "🛡️",
-      trend: "+2.1%",
-      description: "Overall academic risk assessment"
-    },
+
     {
       title: "Attendance Rate",
       value: "92.5%",
@@ -148,15 +139,18 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
     { semester: "Sem 3", gpa: 8.1, classAvg: 7.7, attendance: 89 },
     { semester: "Sem 4", gpa: 8.4, classAvg: 7.8, attendance: 92.5 },
   ]
-
-  // Dropout Risk Factors
-  const riskFactorsData = [
-    { factor: "Attendance", score: 92, risk: "Low" },
-    { factor: "Academic", score: 84, risk: "Low" },
-    { factor: "Financial", score: 65, risk: "Medium" },
-    { factor: "Engagement", score: 78, risk: "Low" },
-    { factor: "Social", score: 88, risk: "Low" }
+  // Exam Performance Over Time
+  const examPerformanceData = [
+    { exam: "Mid-Sem 1", score: 78, classAvg: 75, maxScore: 100 },
+    { exam: "End-Sem 1", score: 82, classAvg: 77, maxScore: 100 },
+    { exam: "Mid-Sem 2", score: 85, classAvg: 78, maxScore: 100 },
+    { exam: "End-Sem 2", score: 88, classAvg: 80, maxScore: 100 },
+    { exam: "Mid-Sem 3", score: 84, classAvg: 79, maxScore: 100 },
+    { exam: "End-Sem 3", score: 90, classAvg: 81, maxScore: 100 },
+    { exam: "Mid-Sem 4", score: 92, classAvg: 82, maxScore: 100 },
+    { exam: "End-Sem 4", score: 89, classAvg: 83, maxScore: 100 },
   ]
+
 
   // AI Recommendations
   const aiRecommendations = [
@@ -302,16 +296,16 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {studentKPIs.map((kpi, index) => (
           <Card key={index} className={`border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm ${kpi.status === 'excellent' ? 'bg-gradient-to-br from-status-excellent/10 to-status-excellent/5 hover:border-status-excellent' :
-              kpi.status === 'good' ? 'bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 hover:border-brand-primary' :
-                kpi.status === 'on-track' ? 'bg-gradient-to-br from-status-warning/10 to-status-warning/5 hover:border-status-warning' :
-                  'bg-gradient-to-br from-status-danger/10 to-status-danger/5 hover:border-status-danger'
+            kpi.status === 'good' ? 'bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 hover:border-brand-primary' :
+              kpi.status === 'on-track' ? 'bg-gradient-to-br from-status-warning/10 to-status-warning/5 hover:border-status-warning' :
+                'bg-gradient-to-br from-status-danger/10 to-status-danger/5 hover:border-status-danger'
             }`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-white/40 backdrop-blur-sm border-b border-white/60">
               <CardTitle className="text-sm font-semibold text-slate-800">{kpi.title}</CardTitle>
               <div className={`p-2 rounded-full ${kpi.status === 'excellent' ? 'bg-status-excellent/20' :
-                  kpi.status === 'good' ? 'bg-brand-primary/20' :
-                    kpi.status === 'on-track' ? 'bg-status-warning/20' :
-                      'bg-status-danger/20'
+                kpi.status === 'good' ? 'bg-brand-primary/20' :
+                  kpi.status === 'on-track' ? 'bg-status-warning/20' :
+                    'bg-status-danger/20'
                 }`}>
                 <span className="text-lg">{kpi.icon}</span>
               </div>
@@ -328,9 +322,9 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
                 <Progress
                   value={kpi.percentage}
                   className={`h-2 ${kpi.status === 'excellent' ? '[&>div]:bg-status-excellent' :
-                      kpi.status === 'good' ? '[&>div]:bg-brand-primary' :
-                        kpi.status === 'on-track' ? '[&>div]:bg-status-warning' :
-                          '[&>div]:bg-status-danger'
+                    kpi.status === 'good' ? '[&>div]:bg-brand-primary' :
+                      kpi.status === 'on-track' ? '[&>div]:bg-status-warning' :
+                        '[&>div]:bg-status-danger'
                     }`}
                 />
               </div>
@@ -363,8 +357,8 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {aiRecommendations.map((rec, index) => (
               <div key={index} className={`p-4 rounded-lg border ${rec.priority === 'high' ? 'bg-red-50 border-red-200' :
-                  rec.priority === 'medium' ? 'bg-yellow-50 border-yellow-200' :
-                    'bg-blue-50 border-blue-200'
+                rec.priority === 'medium' ? 'bg-yellow-50 border-yellow-200' :
+                  'bg-blue-50 border-blue-200'
                 }`}>
                 <div className="flex items-start gap-3">
                   <span className="text-2xl">{rec.icon}</span>
@@ -372,8 +366,8 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
                     <h4 className="font-semibold text-slate-800">{rec.title}</h4>
                     <p className="text-sm text-slate-600 mt-1">{rec.description}</p>
                     <Badge className={`mt-2 ${rec.priority === 'high' ? 'bg-red-100 text-red-800' :
-                        rec.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-blue-100 text-blue-800'
+                      rec.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-blue-100 text-blue-800'
                       }`}>
                       {rec.priority} priority
                     </Badge>
@@ -431,34 +425,53 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
           </CardContent>
         </Card>
 
-        {/* Risk Factors Chart */}
-        <Card className="border-2 border-orange-100 shadow-lg">
+        {/* Exam Performance Chart */}
+        <Card className="border-2 border-green-100 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-slate-800">Dropout Risk Analysis</CardTitle>
-            <CardDescription>Risk factor contribution assessment</CardDescription>
+            <CardTitle className="text-slate-800">Exam Performance Trend</CardTitle>
+            <CardDescription>Score progression across exams</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={riskFactorsData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#fed7aa" />
-                <XAxis dataKey="factor" stroke="#64748b" />
+              <LineChart data={examPerformanceData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
+                <XAxis
+                  dataKey="exam"
+                  stroke="#64748b"
+                  angle={-45}
+                  textAnchor="end"
+                  height={80}
+                />
                 <YAxis stroke="#64748b" domain={[0, 100]} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#fef3c7",
-                    border: "1px solid #fbbf24",
+                    backgroundColor: "#f8fafc",
+                    border: "1px solid #e2e8f0",
                     borderRadius: "8px",
                   }}
                 />
-                <Bar
+                <Line
+                  type="monotone"
                   dataKey="score"
-                  fill="#f59e0b"
-                  radius={[4, 4, 0, 0]}
+                  stroke="#10b981"
+                  strokeWidth={3}
+                  dot={{ fill: "#10b981", strokeWidth: 2, r: 6 }}
+                  name="Your Score"
                 />
-              </BarChart>
+                <Line
+                  type="monotone"
+                  dataKey="classAvg"
+                  stroke="#94a3b8"
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={{ fill: "#94a3b8", strokeWidth: 2, r: 4 }}
+                  name="Class Average"
+                />
+              </LineChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
+
       </div>
 
       {/* Performance Comparison */}
@@ -617,8 +630,8 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
           <div className="space-y-4">
             {notifications.map((notification, index) => (
               <div key={index} className={`p-4 rounded-lg border-l-4 ${notification.type === 'alert' ? 'bg-red-50 border-red-400' :
-                  notification.type === 'positive' ? 'bg-status-good/10 border-status-good' :
-                    'bg-blue-50 border-blue-400'
+                notification.type === 'positive' ? 'bg-status-good/10 border-status-good' :
+                  'bg-blue-50 border-blue-400'
                 }`}>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
@@ -634,8 +647,8 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
                     </div>
                   </div>
                   <Badge className={`${notification.priority === 'high' ? 'bg-red-100 text-red-800' :
-                      notification.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-blue-100 text-blue-800'
+                    notification.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-blue-100 text-blue-800'
                     }`}>
                     {notification.priority}
                   </Badge>
@@ -648,85 +661,7 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
     </div>
   )
 
-  const renderGamificationMotivation = () => (
-    <div className="space-y-6">
-      {/* Achievement Badges */}
-      <Card className="border-2 border-yellow-100 shadow-lg bg-gradient-to-br from-yellow-50/80 to-amber-50/60">
-        <CardHeader>
-          <CardTitle className="text-slate-800 flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-yellow-600" />
-            Achievement Badges
-          </CardTitle>
-          <CardDescription>Celebrate your learning milestones</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {achievements.map((achievement, index) => (
-              <div key={index} className={`p-4 rounded-lg text-center transition-all duration-300 ${achievement.earned
-                  ? 'bg-gradient-to-br from-yellow-100 to-amber-100 border-2 border-yellow-300 shadow-md'
-                  : 'bg-gray-100 border-2 border-gray-200 opacity-60'
-                }`}>
-                <div className={`text-3xl mb-2 ${achievement.earned ? 'grayscale-0' : 'grayscale'
-                  }`}>
-                  {achievement.icon}
-                </div>
-                <h4 className={`font-semibold text-sm ${achievement.earned ? 'text-slate-800' : 'text-slate-500'
-                  }`}>
-                  {achievement.name}
-                </h4>
-                <p className={`text-xs mt-1 ${achievement.earned ? 'text-slate-600' : 'text-slate-400'
-                  }`}>
-                  {achievement.description}
-                </p>
-                {achievement.earned && (
-                  <Badge className="mt-2 bg-yellow-200 text-yellow-800">Earned!</Badge>
-                )}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
 
-      {/* Leaderboard */}
-      <Card className="border-2 border-purple-100 shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-slate-800 flex items-center gap-2">
-            <Zap className="h-5 w-5 text-purple-600" />
-            Class Engagement Leaderboard
-          </CardTitle>
-          <CardDescription>Top engaged students this month</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {[
-              { rank: 1, name: "You (Priya Sharma)", score: 2847, badge: "🥇" },
-              { rank: 2, name: "Rahul Verma", score: 2756, badge: "🥈" },
-              { rank: 3, name: "Sneha Patel", score: 2689, badge: "🥉" },
-              { rank: 4, name: "Arjun Singh", score: 2634, badge: "" },
-              { rank: 5, name: "Kavya Reddy", score: 2598, badge: "" }
-            ].map((student, index) => (
-              <div key={index} className={`flex items-center justify-between p-3 rounded-lg ${student.rank === 1 ? 'bg-gradient-to-r from-yellow-100 to-amber-100 border border-yellow-300' :
-                  'bg-slate-50 border border-slate-200'
-                }`}>
-                <div className="flex items-center gap-3">
-                  <span className="text-lg font-bold text-slate-600">#{student.rank}</span>
-                  <span className="text-2xl">{student.badge}</span>
-                  <span className={`font-semibold ${student.rank === 1 ? 'text-yellow-800' : 'text-slate-800'
-                    }`}>
-                    {student.name}
-                  </span>
-                </div>
-                <div className={`font-bold ${student.rank === 1 ? 'text-yellow-700' : 'text-slate-600'
-                  }`}>
-                  {student.score} pts
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
 
   const renderResourcesHelp = () => (
     <div className="space-y-6">
@@ -833,7 +768,6 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
     { id: "analytics", label: "Academic Analytics", icon: TrendingUp },
     { id: "counselling", label: "Counselling & Support", icon: HeartHandshake },
     { id: "notifications", label: "Notifications", icon: Bell },
-    { id: "gamification", label: "Achievements", icon: Trophy },
     { id: "resources", label: "Resources & Help", icon: BookOpen },
   ]
 
@@ -884,8 +818,8 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
                   key={item.id}
                   onClick={() => setActiveSection(item.id)}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${activeSection === item.id
-                      ? "bg-blue-100 text-blue-700 border border-blue-200"
-                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
+                    ? "bg-blue-100 text-blue-700 border border-blue-200"
+                    : "text-slate-600 hover:text-slate-800 hover:bg-slate-100"
                     }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -903,7 +837,6 @@ export default function StudentDashboard({ studentId = "STU001", studentName = "
         {activeSection === "analytics" && renderAcademicAnalytics()}
         {activeSection === "counselling" && renderCounsellingSupport()}
         {activeSection === "notifications" && renderNotificationsAlerts()}
-        {activeSection === "gamification" && renderGamificationMotivation()}
         {activeSection === "resources" && renderResourcesHelp()}
       </main>
 
